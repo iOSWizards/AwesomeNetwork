@@ -1,0 +1,19 @@
+PODS:
+  - AwesomeNetwork (0.1.0):
+    - ReachabilitySwift (~> 3)
+  - ReachabilitySwift (3)
+
+DEPENDENCIES:
+  - AwesomeNetwork (from `../`)
+
+EXTERNAL SOURCES:
+  AwesomeNetwork:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AwesomeNetwork: c85998166e50d03f5ddde8ec80d176c521e6885c
+  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+
+PODFILE CHECKSUM: 236e9af44b17f43add198679bcdd3a3684874910
+
+COCOAPODS: 1.4.0
