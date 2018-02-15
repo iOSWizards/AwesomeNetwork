@@ -16,7 +16,7 @@ public enum NetworkStateEvent: String {
 
 public struct AwesomeNetwork {
 
-    static let shared = AwesomeNetwork()
+    public static let shared = AwesomeNetwork()
     private let reachability = Reachability()
 
     // MARK: - AwesomeNetwork lifecycle
