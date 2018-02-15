@@ -14,7 +14,7 @@ public enum NetworkStateEvent: String {
     case disconnected = "disconnected"
 }
 
-struct AwesomeNetwork {
+public struct AwesomeNetwork {
 
     static let shared = AwesomeNetwork()
     private let reachability = Reachability()
@@ -25,7 +25,7 @@ struct AwesomeNetwork {
         print("AwesomeNetwork: init()")
     }
 
-    func startNetworkStateNotifier() {
+    public func startNetworkStateNotifier() {
         reachability?.whenReachable = { reachability in
             // this is called on a background thread, but UI updates must
             // be on the main thread, like this:
@@ -52,11 +52,11 @@ struct AwesomeNetwork {
         }
     }
 
-    func stopNetworkStateNotifier() {
+    public func stopNetworkStateNotifier() {
         reachability?.stopNotifier()
     }
 
-    func isWifiConnected(viewController: UIViewController,
+    public func isWifiConnected(viewController: UIViewController,
                          noConnectionMessage: String,
                          okButtonTitle: String = "Ok",
                          onPress: (() -> Void)? = nil) -> Bool {
@@ -77,7 +77,7 @@ struct AwesomeNetwork {
     /*
      * True if Internet connection is reachable either by WiFi or Cellular and false in any other case.
      */
-    func isReachable(viewController: UIViewController,
+    public func isReachable(viewController: UIViewController,
                      noConnectionMessage: String,
                      okButtonTitle: String = "Ok",
                      onPress: (() -> Void)? = nil) -> Bool {
@@ -91,15 +91,15 @@ struct AwesomeNetwork {
         return false
     }
     
-    func isReachable() -> Bool {
+    public func isReachable() -> Bool {
         return reachability?.isReachable ?? false
     }
 
-    func addObserver(_ observer: Any, selector: Selector, event: NetworkStateEvent) {
+    public func addObserver(_ observer: Any, selector: Selector, event: NetworkStateEvent) {
         NotificationCenter.default.addObserver(observer, selector: selector, name: notificationName(with: event), object: nil)
     }
 
-    func removeObserver(_ observer: Any) {
+    public func removeObserver(_ observer: Any) {
         NotificationCenter.default.removeObserver(observer)
     }
 
