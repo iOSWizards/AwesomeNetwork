@@ -10,7 +10,7 @@
 		042DDE8F75209EBF86DE76CAD86316C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4190B3BD9EEFB247FCF2F0ACB5B2AF3C /* Foundation.framework */; };
 		0664067AED307D615DA3906F79D54DB9 /* Pods-AwesomeNetwork_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A2AA9434990FBA4837C014BDE8A34A03 /* Pods-AwesomeNetwork_Example-dummy.m */; };
 		0A22C6352035662E0012DB0E /* UIViewController+Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22C6342035662E0012DB0E /* UIViewController+Alerts.swift */; };
-		0A22C63720356C820012DB0E /* AwesomeNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22C63620356C820012DB0E /* AwesomeNetworkHelper.swift */; };
+		0A22C63920356D640012DB0E /* AwesomeNetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A22C63820356D640012DB0E /* AwesomeNetworkHelper.swift */; };
 		2AEB36FF0725B1AC29914A022764CD91 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F42F9DD001E3E105AA07178DEF7CAB2F /* SystemConfiguration.framework */; };
 		32DF0103B51FE99DB4B9F9ED220A41F2 /* AwesomeNetwork-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 262AE6775FAF37FB799E74ED1AD9667C /* AwesomeNetwork-dummy.m */; };
 		3644A7A92C99BC166E24EC281C884408 /* AwesomeNetwork-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 97B7AC3B92AA1CFBD33FDBF6929A5467 /* AwesomeNetwork-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -54,7 +54,7 @@
 /* Begin PBXFileReference section */
 		04F3371DE573D48A4720F6CD654D8D63 /* Pods-AwesomeNetwork_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-AwesomeNetwork_Tests-umbrella.h"; sourceTree = "<group>"; };
 		0A22C6342035662E0012DB0E /* UIViewController+Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIViewController+Alerts.swift"; path = "AwesomeNetwork/Classes/UIViewController+Alerts.swift"; sourceTree = "<group>"; };
-		0A22C63620356C820012DB0E /* AwesomeNetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeNetworkHelper.swift; sourceTree = "<group>"; };
+		0A22C63820356D640012DB0E /* AwesomeNetworkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AwesomeNetworkHelper.swift; path = AwesomeNetwork/Classes/AwesomeNetworkHelper.swift; sourceTree = "<group>"; };
 		0E39581F9C0959FBC5BF8FB7B62A0228 /* Pods-AwesomeNetwork_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-AwesomeNetwork_Example-frameworks.sh"; sourceTree = "<group>"; };
 		1C15D5862DEE0FC826A6DCE0DE4DA8B6 /* Pods-AwesomeNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-AwesomeNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
 		1F84B6130651A2D33B43E2262595D590 /* ReachabilitySwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReachabilitySwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				3F9901FFA9751A44ACCA71EBCFF428C5 /* AwesomeNetwork.swift */,
-				0A22C63620356C820012DB0E /* AwesomeNetworkHelper.swift */,
+				0A22C63820356D640012DB0E /* AwesomeNetworkHelper.swift */,
 				0A22C6342035662E0012DB0E /* UIViewController+Alerts.swift */,
 				8E9B81134AAC54F5E82A77755F29011E /* Pod */,
 				B1DC014E4D2FD5234AC236941F95D181 /* Support Files */,
@@ -452,7 +452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A22C63720356C820012DB0E /* AwesomeNetworkHelper.swift in Sources */,
+				0A22C63920356D640012DB0E /* AwesomeNetworkHelper.swift in Sources */,
 				32DF0103B51FE99DB4B9F9ED220A41F2 /* AwesomeNetwork-dummy.m in Sources */,
 				0A22C6352035662E0012DB0E /* UIViewController+Alerts.swift in Sources */,
 				6F48C8019AC99F57E34020E259B3AC3D /* AwesomeNetwork.swift in Sources */,
