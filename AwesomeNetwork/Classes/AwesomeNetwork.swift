@@ -16,8 +16,13 @@ public enum NetworkStateEvent: String {
 
 public struct AwesomeNetwork {
 
-    public static let shared = AwesomeNetwork()
+    public static var shared: AwesomeNetwork?
     private let reachability = Reachability()
+    
+    public static func startNetworkStateNotifier() {
+        shared = AwesomeNetwork()
+        shared?.startNetworkStateNotifier()
+    }
 
     // MARK: - AwesomeNetwork lifecycle
 
