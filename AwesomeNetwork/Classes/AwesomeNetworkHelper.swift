@@ -53,7 +53,7 @@ public struct AwesomeNetworkHelper {
                                 noConnectionMessage: String,
                                 okButtonTitle: String = "Ok",
                                 onPress: (() -> Void)? = nil) -> Bool {
-        if isReachable() {
+        if isReachable {
             if reachability?.isReachableViaWiFi ?? false {
                 return true
             }
@@ -74,7 +74,7 @@ public struct AwesomeNetworkHelper {
                             noConnectionMessage: String,
                             okButtonTitle: String = "Ok",
                             onPress: (() -> Void)? = nil) -> Bool {
-        if isReachable() {
+        if isReachable {
             return true
         }
         
@@ -84,8 +84,12 @@ public struct AwesomeNetworkHelper {
         return false
     }
     
-    public func isReachable() -> Bool {
+    public var isReachable: Bool {
         return reachability?.isReachable ?? false
+    }
+    
+    public var isWifiReachable: Bool {
+        return reachability?.isReachableViaWiFi ?? false && isReachable
     }
     
     public func addObserver(_ observer: Any, selector: Selector, event: NetworkStateEvent) {
