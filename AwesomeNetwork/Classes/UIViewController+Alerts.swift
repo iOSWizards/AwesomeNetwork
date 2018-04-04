@@ -9,7 +9,7 @@ import UIKit
 
 extension UIViewController {
     
-    public func showAlert(withTitle title: String? = nil, message: String?, completion: (() -> Void)? = nil, buttons: (UIAlertActionStyle, String, (() -> Void)?)...) {
+    func showAlert(withTitle title: String? = nil, message: String?, completion: (() -> Void)? = nil, buttons: (UIAlertActionStyle, String, (() -> Void)?)...) {
         
         guard let message = message, message.count > 0 else {
             return
