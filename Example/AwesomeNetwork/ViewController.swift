@@ -13,15 +13,23 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        AwesomeNetwork.shared?.addObserver(self, selector: #selector(networkConnected), event: .connected)
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        AwesomeNetwork.shared.addObserver(self, selector: #selector(networkConnected), event: .connected)
+        AwesomeNetwork.shared.addObserver(self, selector: #selector(networkDisconnected), event: .disconnected)
+        
     }
     
     @objc func networkConnected() {
         print("Executing CONNECTED")
+        
+    }
+    
+    @objc func networkDisconnected() {
+        print("Executing DIS+CONNECTED")
         
     }
 }
