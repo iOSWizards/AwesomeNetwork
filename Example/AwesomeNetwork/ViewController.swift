@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AwesomeNetwork
 
 class ViewController: UIViewController {
 
@@ -15,5 +16,13 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        AwesomeNetwork.shared?.addObserver(self, selector: #selector(networkConnected), event: .connected)
+    }
+    
+    @objc func networkConnected() {
+        print("Executing CONNECTED")
+        
+    }
 }
 

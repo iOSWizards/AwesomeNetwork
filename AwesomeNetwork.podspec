@@ -28,9 +28,9 @@ Network state handling.
   s.source           = { :git => 'https://github.com/iOSWizards/AwesomeNetwork.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
-  s.source_files = 'AwesomeNetwork/Classes/**/*'
+  s.source_files = 'AwesomeNetwork/Classes/**/*.{swift}'
   
   # s.resource_bundles = {
   #   'AwesomeNetwork' => ['AwesomeNetwork/Assets/*.png']

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import ReachabilitySwift
+import Reachability
 
 public struct AwesomeNetworkHelper {
     
@@ -23,8 +23,8 @@ public struct AwesomeNetworkHelper {
             // this is called on a background thread, but UI updates must
             // be on the main thread, like this:
             DispatchQueue.main.async {
-                if reachability.isReachable {
-                    print("AwesomeNetwork: Reachable via \(reachability.currentReachabilityString)")
+                if reachability.connection != .none {
+                    print("AwesomeNetwork: Reachable via \(reachability.connection.description)")
                     self.postNotification(with: .connected)
                 }
             }
@@ -53,14 +53,14 @@ public struct AwesomeNetworkHelper {
                                 noConnectionMessage: String,
                                 okButtonTitle: String = "Ok",
                                 onPress: (() -> Void)? = nil) -> Bool {
-        if isReachable {
-            if reachability?.isReachableViaWiFi ?? false {
-                return true
-            }
-        }
         
-        viewController.showAlert(message: noConnectionMessage, completion: {
-        }, buttons: (UIAlertActionStyle.default, okButtonTitle, onPress))
+        if reachability?.connection == .wifi {
+            return true
+        } else {
+            viewController.showAlert(message: noConnectionMessage, completion: {
+            }, buttons: (UIAlertActionStyle.default, okButtonTitle, onPress))
+            
+        }
         
         return false
     }
@@ -85,11 +85,11 @@ public struct AwesomeNetworkHelper {
     }
     
     public var isReachable: Bool {
-        return reachability?.isReachable ?? false
+        return reachability?.connection != .none
     }
     
     public var isWifiReachable: Bool {
-        return reachability?.isReachableViaWiFi ?? false && isReachable
+        return reachability?.connection == .wifi
     }
     
     public func addObserver(_ observer: Any, selector: Selector, event: NetworkStateEvent) {
