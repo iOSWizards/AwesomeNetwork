@@ -127,3 +127,15 @@ public struct AwesomeNetwork {
     }
     
 }
+
+extension UIView {
+    public func listenToNetwork(onChange: @escaping (Bool) -> Void) {
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: NetworkStateEvent.connected.rawValue), object: nil, queue: .main) { (_) in
+            onChange(true)
+        }
+        
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: NetworkStateEvent.disconnected.rawValue), object: nil, queue: .main) { (_) in
+            onChange(false)
+        }
+    }
+}

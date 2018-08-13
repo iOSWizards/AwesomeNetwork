@@ -13,13 +13,14 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.listenToNetwork { (isConnected) in
+            print("Network is Connected :\(isConnected)")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
-        AwesomeNetwork.shared.addObserver(self, selector: #selector(networkConnected), event: .connected)
-        AwesomeNetwork.shared.addObserver(self, selector: #selector(networkDisconnected), event: .disconnected)
         
     }
     
@@ -28,14 +29,5 @@ class ViewController: UIViewController {
         AwesomeNetwork.shared.removeObserver(self)
     }
     
-    @objc func networkConnected() {
-        print("Executing CONNECTED")
-        
-    }
-    
-    @objc func networkDisconnected() {
-        print("Executing DIS+CONNECTED")
-        
-    }
 }
 
