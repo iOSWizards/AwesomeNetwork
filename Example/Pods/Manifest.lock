@@ -1,19 +1,23 @@
 PODS:
-  - AwesomeNetwork (0.1.0):
-    - ReachabilitySwift (~> 3)
-  - ReachabilitySwift (3)
+  - AwesomeNetwork (0.1.4):
+    - ReachabilitySwift (~> 4)
+  - ReachabilitySwift (4.1.0)
 
 DEPENDENCIES:
   - AwesomeNetwork (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ReachabilitySwift
+
 EXTERNAL SOURCES:
   AwesomeNetwork:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  AwesomeNetwork: c85998166e50d03f5ddde8ec80d176c521e6885c
-  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
+  AwesomeNetwork: 9a5106c573e074fa71bcfec1cc8a7d8b921eca29
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
 
 PODFILE CHECKSUM: 236e9af44b17f43add198679bcdd3a3684874910
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AwesomeNetwork'
-  s.version          = '0.1.4'
+  s.version          = '0.1.5'
   s.summary          = 'Network state handling.'
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Network state handling.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'AwesomeNetwork/Classes/**/*'
+  s.source_files = 'AwesomeNetwork/Classes/**/*.{swift}'
   
   # s.resource_bundles = {
   #   'AwesomeNetwork' => ['AwesomeNetwork/Assets/*.png']
@@ -38,5 +38,5 @@ Network state handling.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'ReachabilitySwift', '~> 3'
+  s.dependency 'ReachabilitySwift', '~> 4'
 end
