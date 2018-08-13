@@ -23,6 +23,11 @@ class ViewController: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        AwesomeNetwork.shared.removeObserver(self)
+    }
+    
     @objc func networkConnected() {
         print("Executing CONNECTED")
         

@@ -20,11 +20,25 @@ AwesomeUIMagic is available through [CocoaPods](http://cocoapods.org). To instal
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "AwesomeNetwork", git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.1.4'
+pod "AwesomeNetwork", git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.1.5'
 ```
 ## Usage
 
 Import with cocoapods and be happy. :)
+
+### AppDelete.swift
+- Start Notifier
+```AwesomeNetwork.shared.startNetworkStateNotifier()```
+
+- Stop Notifier
+```AwesomeNetwork.shared.stopNetworkStateNotifier()```
+
+### ViewController
+- Add Observer : viewWillAppear
+```AwesomeNetwork.shared.addObserver(self, selector: #selector(networkConnected), event: .connected)```
+
+- Remove Observer: viewWillDisappear
+```AwesomeNetwork.shared.removeObserver(self)```
 
 ## License
 
