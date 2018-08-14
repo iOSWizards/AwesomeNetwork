@@ -143,10 +143,12 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AwesomeConstants/AwesomeConstants.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AwesomeNetwork/AwesomeNetwork.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/AwesomeConstants/AwesomeConstants.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AwesomeNetwork/AwesomeNetwork.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework"
 fi

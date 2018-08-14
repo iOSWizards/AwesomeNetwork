@@ -8,6 +8,7 @@
 
 import Foundation
 import Reachability
+import AwesomeConstants
 
 public enum NetworkStateEvent: String {
     case connected

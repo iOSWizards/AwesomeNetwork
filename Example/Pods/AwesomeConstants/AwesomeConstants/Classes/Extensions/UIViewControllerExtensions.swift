@@ -1,15 +1,15 @@
 //
-//  UIViewController+Alerts.swift
-//  AwesomeNetwork
+//  UIViewControllerExtensions.swift
+//  AwesomeConstants
 //
-//  Created by Evandro Harrison Hoffmann on 2/15/18.
+//  Created by Emmanuel on 14/08/2018.
 //
 
-import UIKit
+import Foundation
 
 extension UIViewController {
     
-    func showAlert(withTitle title: String? = nil, message: String?, completion: (() -> Void)? = nil, buttons: (UIAlertActionStyle, String, (() -> Void)?)...) {
+    public func showAlert(withTitle title: String? = nil, message: String?, completion: (() -> Void)? = nil, buttons: (UIAlertActionStyle, String, (() -> Void)?)...) {
         
         guard let message = message, message.count > 0 else {
             return

@@ -1,6 +1,6 @@
 {
   "name": "AwesomeNetwork",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "summary": "Network state handling.",
   "description": "Network state handling.",
   "homepage": "https://github.com/iOSWizards/AwesomeNetwork",
@@ -13,15 +13,18 @@
   },
   "source": {
     "git": "https://github.com/iOSWizards/AwesomeNetwork.git",
-    "tag": "0.1.4"
+    "tag": "0.1.5"
   },
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "AwesomeNetwork/Classes/**/*",
+  "source_files": "AwesomeNetwork/Classes/**/*.{swift}",
   "dependencies": {
     "ReachabilitySwift": [
       "~> 4"
+    ],
+    "AwesomeConstants": [
+
     ]
   }
 }

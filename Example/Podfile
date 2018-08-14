@@ -2,6 +2,10 @@ use_frameworks!
 
 target 'AwesomeNetwork_Example' do
   pod 'AwesomeNetwork', :path => '../'
+  
+  # AwesomeConstants
+  pod 'AwesomeConstants', git: 'https://github.com/Mindvalley/Mobile_iOS_Library_AwesomeConstants.git', tag: '0.2.2'
+
 
   target 'AwesomeNetwork_Tests' do
     inherit! :search_paths
