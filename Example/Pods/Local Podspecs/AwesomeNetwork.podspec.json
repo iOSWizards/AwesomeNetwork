@@ -1,6 +1,6 @@
 {
   "name": "AwesomeNetwork",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "summary": "Network state handling.",
   "description": "Network state handling.",
   "homepage": "https://github.com/iOSWizards/AwesomeNetwork",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://github.com/iOSWizards/AwesomeNetwork.git",
-    "tag": "0.1.5"
+    "tag": "0.1.6"
   },
   "platforms": {
     "ios": "9.0"

@@ -1,12 +1,12 @@
 PODS:
-  - AwesomeConstants (0.2.2)
-  - AwesomeNetwork (0.1.5):
+  - AwesomeConstants (0.2.4.1)
+  - AwesomeNetwork (0.1.6):
     - AwesomeConstants
     - ReachabilitySwift (~> 4)
   - ReachabilitySwift (4.1.0)
 
 DEPENDENCIES:
-  - AwesomeConstants (from `https://github.com/Mindvalley/Mobile_iOS_Library_AwesomeConstants.git`, tag `0.2.2`)
+  - AwesomeConstants (from `https://github.com/Mindvalley/Mobile_iOS_Library_AwesomeConstants.git`, tag `0.2.4.1`)
   - AwesomeNetwork (from `../`)
 
 SPEC REPOS:
@@ -16,20 +16,20 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AwesomeConstants:
     :git: https://github.com/Mindvalley/Mobile_iOS_Library_AwesomeConstants.git
-    :tag: 0.2.2
+    :tag: 0.2.4.1
   AwesomeNetwork:
     :path: "../"
 
 CHECKOUT OPTIONS:
   AwesomeConstants:
     :git: https://github.com/Mindvalley/Mobile_iOS_Library_AwesomeConstants.git
-    :tag: 0.2.2
+    :tag: 0.2.4.1
 
 SPEC CHECKSUMS:
-  AwesomeConstants: e248eaf7a754900387d2aeb4be2741b455584a86
-  AwesomeNetwork: f6b23a38c1ad639c593e49159ac0caec48512fa5
+  AwesomeConstants: 31d46478989b571450c59a0c264b2a54f486cf2d
+  AwesomeNetwork: 9e721c03de1e912410c1053ec9d4ec99b881559d
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
 
-PODFILE CHECKSUM: bb682055fd46178af45ea9bd411b754433037242
+PODFILE CHECKSUM: b4a5454901fc8b034b119cbc535258e68158b50a
 
 COCOAPODS: 1.5.3

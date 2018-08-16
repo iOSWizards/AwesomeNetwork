@@ -1,34 +1,92 @@
 //
-//  UIViewControllerExtensions.swift
-//  AwesomeConstants
+//  UIViewController+Quests.swift
+//  Quests
 //
-//  Created by Emmanuel on 14/08/2018.
+//  Created by Evandro Harrison Hoffmann on 3/23/17.
+//  Copyright © 2017 Mindvalley. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-extension UIViewController {
-    
-    public func showAlert(withTitle title: String? = nil, message: String?, completion: (() -> Void)? = nil, buttons: (UIAlertActionStyle, String, (() -> Void)?)...) {
-        
-        guard let message = message, message.count > 0 else {
-            return
-        }
-        
-        if #available(iOS 8.0, *) {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            
-            for button in buttons {
-                alertController.addAction(UIAlertAction(title: button.1, style: button.0) { (_: UIAlertAction!) in
-                    if let completion = completion { completion() }
-                    if let actionBlock = button.2 { actionBlock() }
-                })
+extension UIApplication {
+
+    public var topViewController: UIViewController? {
+        if var topController = self.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
             }
-            self.present(alertController, animated: true, completion: nil)
+
+            return topController
+        }
+
+        return nil
+    }
+
+    public static var topViewController: UIViewController? {
+        return UIApplication.shared.topViewController
+    }
+
+    public func vibrate(_ feedbackType: UINotificationFeedbackType) {
+        if #available(iOS 10.0, *) {
+            let generator = UINotificationFeedbackGenerator()
+            generator.notificationOccurred(feedbackType)
         } else {
-            // Handle prior iOS Versions
-            
+            // Fallback on earlier versions
+        }
+    }
+}
+
+import SafariServices
+extension UIViewController: SFSafariViewControllerDelegate {
+    
+    public func presentWebPageInSafari(withURLString URLString: String) {
+        
+        if let url = URL(string: URLString) {
+            if UIApplication.shared.canOpenURL(url) {
+                let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                vc.delegate = self
+                self.present(vc, animated: true)
+            }
         }
     }
     
+    public func presentWebPageInSafari(withURL url: URL) {
+        if UIApplication.shared.canOpenURL(url) {
+            let vc = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+            vc.delegate = self
+            self.present(vc, animated: true)
+        }
+    }
+    
+    public func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+import AVKit
+import AVFoundation
+extension UIViewController {
+
+    public func openMedia(urlString: String?) {
+        guard let urlString = urlString, let url = URL(string: urlString) else {
+            return
+        }
+
+        try? AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, with: [])
+        let playerViewController = AVPlayerViewController()
+        playerViewController.showsPlaybackControls = true
+        playerViewController.player = AVPlayer(url: url)
+        playerViewController.player?.play()
+
+        present(playerViewController, animated: true, completion: {
+
+        })
+    }
+
+    public func setLayoutsForPhoneX(constraints: [NSLayoutConstraint]) {
+        for constraint in constraints {
+            constraint.constant += 20
+        }
+    }
 }
