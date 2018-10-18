@@ -8,7 +8,6 @@
 
 import Foundation
 import Reachability
-import AwesomeConstants
 
 public enum NetworkStateEvent: String {
     case connected
@@ -63,7 +62,7 @@ public struct AwesomeNetwork {
             return true
         } else {
             viewController.showAlert(message: noConnectionMessage, completion: {
-            }, buttons: (UIAlertActionStyle.default, okButtonTitle, onPress))
+            }, buttons: (UIAlertAction.Style.default, okButtonTitle, onPress))
             
         }
         
@@ -84,7 +83,7 @@ public struct AwesomeNetwork {
         }
         
         viewController.showAlert(message: noConnectionMessage, completion: {
-        }, buttons: (UIAlertActionStyle.default, okButtonTitle, onPress))
+        }, buttons: (UIAlertAction.Style.default, okButtonTitle, onPress))
         
         return false
     }
@@ -143,7 +142,7 @@ extension UIView {
 
 extension UIViewController {
     
-    func showAlert(withTitle title: String? = nil, message: String?,  completion: (() -> ())? = nil, buttons: (UIAlertActionStyle, String, (() -> ())?)...) {
+    func showAlert(withTitle title: String? = nil, message: String?,  completion: (() -> ())? = nil, buttons: (UIAlertAction.Style, String, (() -> ())?)...) {
         
         guard let message = message, message.count > 0 else {
             return
@@ -151,7 +150,7 @@ extension UIViewController {
         
         if #available(iOS 8.0, *){
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.modalPresentationStyle = isPad ? .popover : .currentContext
+            alertController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .pad ? .popover : .currentContext
             
             for button in buttons {
                 alertController.addAction(UIAlertAction(title: button.1, style: button.0) { (_: UIAlertAction!) in
