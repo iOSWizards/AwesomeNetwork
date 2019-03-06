@@ -49,29 +49,9 @@ public class AwesomeNetwork {
         shared.uploader?.requestManager.cancelAllRequests()
     }
     
-    /// Returns data either from cache or from URL
-    ///
-    /// - Parameters:
-    ///   - urlString: URL String
-    ///   - cacheRule: Choose from Cache or URL, default is cache falling back to URL
-    ///   - method: URL Method
-    ///   - bodyData: Data body if any
-    ///   - headers: Dictionary of headers
-    ///   - timeout: Timeout time in seconds
-    ///   - queue: Dispatch queue for request
-    ///   - retryCount: Retry count before giving up
-    ///   - completion: (data, errorData)
-    public static func requestData(from urlString: String?,
-                                   cacheRule: AwesomeCacheRule = shared.defaultCacheRule,
-                                   method: URLMethod = .GET,
-                                   bodyData: Data? = nil,
-                                   headers: [String: String]? = nil,
-                                   queryItems: [URLQueryItem]? = nil,
-                                   timeoutAfter timeout: TimeInterval = shared.defaultRequestTimeout,
-                                   usingDispatchQueue queue: DispatchQueue? = nil,
-                                   retryCount: Int = 0,
+    public static func requestData(with request: AwesomeRequestParameters?,
                                    completion:@escaping AwesomeDataResponse) {
-        guard let urlString = urlString else {
+        guard let request = request else {
             completion(nil, AwesomeError.invalidUrl)
             return
         }
@@ -79,46 +59,29 @@ public class AwesomeNetwork {
         var didReturnCache: Bool = false
         
         // gets from cache if any
-        if cacheRule.shouldGetFromCache,
-            let data = shared.cacheManager?.verifyForCache(withUrl: urlString, method: method, body: bodyData) {
+        if request.cacheRule.shouldGetFromCache,
+            let data = request.cachedData {
             completion(data, nil)
             didReturnCache = true
         }
         
         // proceed to url if set in cache rule
-        guard cacheRule.shouldGetFromUrl(didReturnCache: didReturnCache) else {
+        guard request.cacheRule.shouldGetFromUrl(didReturnCache: didReturnCache) else {
             if !didReturnCache {
                 completion(nil, AwesomeError.cacheRule("Cache rule set to get only from cache, but there was no cache for this URL request."))
             }
             return
         }
     
-        shared.requester?.performRequest(urlString,
-                                         method: method,
-                                         bodyData: bodyData,
-                                         headers: headers,
-                                         queryItems: queryItems,
-                                         timeoutAfter: timeout,
-                                         useSemaphore: shared.useSemaphore,
-                                         queue: queue) { (data, error) in
-            // caches data
-            shared.cacheManager?.saveCache(withUrl: urlString, method: method, body: bodyData, data: data)
-            
+        shared.requester?.performRequest(request, useSemaphore: shared.useSemaphore) { (data, error) in
+            request.saveToCache(data)
             completion(data, error)
         }
     }
     
-    static func requestGeneric<T: Decodable>(from urlString: String?,
-                                             cacheRule: AwesomeCacheRule = shared.defaultCacheRule,
-                                             method: URLMethod = .GET,
-                                             bodyData: Data? = nil,
-                                             headers: [String: String]? = nil,
-                                             queryItems: [URLQueryItem]? = nil,
-                                             timeoutAfter timeout: TimeInterval = shared.defaultRequestTimeout,
-                                             usingDispatchQueue queue: DispatchQueue? = nil,
-                                             retryCount: Int = 0,
+    static func requestGeneric<T: Decodable>(with request: AwesomeRequestParameters?,
                                              completion:@escaping (T?, AwesomeError?) -> Void) {
-        requestData(from: urlString, cacheRule: cacheRule, method: method, bodyData: bodyData, headers: headers, queryItems: queryItems, timeoutAfter: timeout, usingDispatchQueue: queue, retryCount: retryCount) { (data, error) in
+        requestData(with: request) { (data, error) in
             if let error = error {
                 completion(nil, error)
                 return
@@ -134,6 +97,28 @@ public class AwesomeNetwork {
                 completion(generic, nil)
             } catch {
                 completion(nil, AwesomeError.parse(error.localizedDescription))
+            }
+        }
+    }
+    
+    static func requestGenericArray<T: Decodable>(with request: AwesomeRequestParameters?,
+                                                  completion:@escaping ([T], AwesomeError?) -> Void) {
+        requestData(with: request) { (data, error) in
+            if let error = error {
+                completion([], error)
+                return
+            }
+            
+            guard let data = data else {
+                completion([], AwesomeError.unknown("No error from server and Data is nil."))
+                return
+            }
+            
+            do {
+                let generic = try JSONDecoder().decode([T].self, from: data)
+                completion(generic, nil)
+            } catch {
+                completion([], AwesomeError.parse(error.localizedDescription))
             }
         }
     }

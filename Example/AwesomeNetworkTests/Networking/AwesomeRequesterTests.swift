@@ -31,15 +31,17 @@ class AwesomeRequesterTests: XCTestCase {
         let exp = expectation(description: "testPerformRequestUrlError")
         exp.expectedFulfillmentCount = 2
         
+        let request = AwesomeRequestParameters(urlString: nil)
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: nil, expectedError: AwesomeError.invalidUrl)
         
-        AwesomeNetwork.shared.requester?.performRequest(nil, useSemaphore: false) { (data, error) in
+        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: false) { (data, error) in
             exp.fulfill()
             XCTAssertNil(data)
             XCTAssertEqual(error!, AwesomeError.invalidUrl)
         }
         
-        AwesomeNetwork.shared.requester?.performRequest("", useSemaphore: false) { (data, error) in
+        let request2 = AwesomeRequestParameters(urlString: nil)
+        AwesomeNetwork.shared.requester?.performRequest(request2, useSemaphore: false) { (data, error) in
             exp.fulfill()
             XCTAssertNil(data)
             XCTAssertEqual(error!, AwesomeError.invalidUrl)
@@ -52,9 +54,10 @@ class AwesomeRequesterTests: XCTestCase {
         let exp = expectation(description: "testSemaphoreGivenGreenLights")
         exp.expectedFulfillmentCount = 1
         
+        let request = AwesomeRequestParameters(urlString: "https://www.google.com")
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: UUID().uuidString.data(using: .utf8), expectedError: nil)
         
-        AwesomeNetwork.shared.requester?.performRequest("https://www.google.com", useSemaphore: true) { (data, error) in
+        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: true) { (data, error) in
             exp.fulfill()
         }
         
@@ -67,10 +70,11 @@ class AwesomeRequesterTests: XCTestCase {
         let exp = expectation(description: "testRequestQueue")
         exp.expectedFulfillmentCount = 1
         
+        let request = AwesomeRequestParameters(urlString: "https://www.google.com")
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: UUID().uuidString.data(using: .utf8), expectedError: nil)
         
         XCTAssertEqual(AwesomeNetwork.shared.requester?.requestManager.requestQueue.count, 0)
-        AwesomeNetwork.shared.requester?.performRequest("https://www.google.com", useSemaphore: false) { (data, error) in
+        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: false) { (data, error) in
             exp.fulfill()
             XCTAssertEqual(AwesomeNetwork.shared.requester?.requestManager.requestQueue.count, 0)
         }
@@ -85,7 +89,8 @@ class AwesomeRequesterTests: XCTestCase {
         let exp = expectation(description: "testRetry")
         exp.expectedFulfillmentCount = 1
         
-        AwesomeNetwork.shared.requester?.performRequest("http://", useSemaphore: false, retryCount: 2) { (data, error) in
+        let request = AwesomeRequestParameters(urlString: "https://", retryCount: 2)
+        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: false) { (data, error) in
             exp.fulfill()
         }
         

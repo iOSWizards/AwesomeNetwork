@@ -65,7 +65,7 @@ public class AwesomeCacheManager: NSObject {
     
     // MARK: - Requester methods
     
-    public func verifyForCache(withUrl urlString: String, method: URLMethod, body: Data?) -> Data? {
+    public func verifyForCache(withUrl urlString: String, method: String?, body: Data?) -> Data? {
         let url = AwesomeCacheManager.buildURLCacheKey(urlString, method: method, bodyData: body)
         if let data = data(forKey: url) {
             return data
@@ -73,7 +73,7 @@ public class AwesomeCacheManager: NSObject {
         return nil
     }
     
-    public func saveCache(withUrl urlString: String, method: URLMethod, body: Data?, data: Data?) {
+    public func saveCache(withUrl urlString: String, method: String?, body: Data?, data: Data?) {
         if let data = data {
             let url = AwesomeCacheManager.buildURLCacheKey(urlString, method: method, bodyData: body)
             cache(data, forKey: url)
@@ -94,17 +94,17 @@ public class AwesomeCacheManager: NSObject {
     // MARK: - Helpers
     
     static func buildURLCacheKey(_ url: String?,
-                                 method: URLMethod?,
+                                 method: String?,
                                  bodyData: Data?) -> String {
         
         if let bodyData = bodyData,
             let bodyString = String(data: bodyData, encoding: .utf8),
             let urlString = url,
             let method = method {
-                let hashValue = bodyString + urlString + method.rawValue
+                let hashValue = bodyString + urlString + method
                 return urlString + "?keyHash=\(hashValue)"
         } else if let urlString = url, let method = method {
-            let hashValue = urlString + method.rawValue
+            let hashValue = urlString + method
             return urlString + "?keyHash=\(hashValue)"
         }
         return url ?? ""

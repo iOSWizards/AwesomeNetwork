@@ -71,22 +71,35 @@ It has to be done only once per execution.
 /// Returns data either from cache or from URL
 ///
 /// - Parameters:
-///   - urlString: URL String
-///   - CacheRule: Choose from Cache or URL, default is cache falling back to URL
-///   - method: URL Method
-///   - bodyData: Data body if any
-///   - headers: Dictionary of headers
-///   - timeout: Timeout time in seconds
+///   - request: All params to fetch the data
 ///   - completion: (data, errorData)
 
-AwesomeNetwork.perform(_ urlString: String?,
-cacheRule: AwesomeCacheRule = defaultCacheRule,
-method: URLMethod = .GET,
-bodyData: Data? = nil,
-headers: [String: String]? = nil,
-timeoutAfter timeout: TimeInterval = defaultRequestTimeout,
-completion:@escaping AwesomeResponse)
+AANetworking.requestData(_ request: AwesomeRequestParameters?,
+                         completion:@escaping AAResponse)
 ```
+
+**Generic Request: (Codable)**
+```swift
+/// Returns data either from cache or from URL
+///
+/// - Parameters:
+///   - request: All params to fetch the data
+///   - completion: (parsed codable object, errorData)
+
+requestGeneric(with: AwesomeRequestParameters?,
+               completion:@escaping (someObject: SomeCodableClass?, AwesomeError?)
+```
+```swift
+/// Returns data either from cache or from URL
+///
+/// - Parameters:
+///   - request: All params to fetch the data
+///   - completion: (parsed codable object array, errorData)
+
+requestGenericArray(with: AwesomeRequestParameters?,
+                    completion:@escaping (someArray: [SomeCodableClass], AwesomeError?)
+```
+
 
 #### Downloading
 

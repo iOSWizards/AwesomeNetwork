@@ -22,7 +22,8 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testRequestTimeout")
         exp.expectedFulfillmentCount = 1
         
-        AwesomeNetwork.requestData(from: "https://google.com", cacheRule: .fromURL) { (data, error) in
+        let request = AwesomeRequestParameters(urlString: "https://google.com", cacheRule: .fromURL)
+        AwesomeNetwork.requestData(with: request) { (data, error) in
             exp.fulfill()
             XCTAssertEqual(error!, AwesomeError.timeOut(UUID().uuidString))
         }
@@ -38,8 +39,9 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testResponseFromCacheAndUrl")
         exp.expectedFulfillmentCount = 2
         
-        AwesomeNetwork.shared.cacheManager?.saveCache(withUrl: url, method: method, body: nil, data: data)
-        AwesomeNetwork.requestData(from: url, cacheRule: .fromCacheAndUrl, method: method) { (responseData, error) in
+        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheAndUrl)
+        request?.saveToCache(data)
+        AwesomeNetwork.requestData(with: request) { (responseData, error) in
             exp.fulfill()
         }
         
@@ -52,7 +54,8 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testResponseFromCacheOrUrlWithoutCache")
         exp.expectedFulfillmentCount = 1
         
-        AwesomeNetwork.requestData(from: url, cacheRule: .fromCacheOrUrl) { (data, error) in
+        let request = AwesomeRequestParameters(urlString: url, cacheRule: .fromCacheOrUrl)
+        AwesomeNetwork.requestData(with: request) { (data, error) in
             exp.fulfill()
         }
         
@@ -67,8 +70,10 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testResponseFromCacheOrUrlWithCache")
         exp.expectedFulfillmentCount = 1
         
-        AwesomeNetwork.shared.cacheManager?.saveCache(withUrl: url, method: method, body: nil, data: data)
-        AwesomeNetwork.requestData(from: url, cacheRule: .fromCacheOrUrl, method: method) { (responseData, error) in
+        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOrUrl)
+        request?.saveToCache(data)
+        
+        AwesomeNetwork.requestData(with: request) { (responseData, error) in
             exp.fulfill()
         }
         
@@ -81,7 +86,9 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testResponseFromCacheOnlyWithoutCache")
         exp.isInverted = true
         
-        AwesomeNetwork.requestData(from: url, cacheRule: .fromCacheOnly) { (responseData, error) in
+        let request = AwesomeRequestParameters(urlString: url, cacheRule: .fromCacheOnly)
+        
+        AwesomeNetwork.requestData(with: request) { (responseData, error) in
             XCTAssertNil(responseData)
             XCTAssertEqual(error!, AwesomeError.cacheRule(UUID().uuidString))
         }
@@ -97,8 +104,10 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testResponseFromCacheOrUrlWithCache")
         exp.expectedFulfillmentCount = 1
         
-        AwesomeNetwork.shared.cacheManager?.saveCache(withUrl: url, method: method, body: nil, data: data)
-        AwesomeNetwork.requestData(from: url, cacheRule: .fromCacheOnly, method: method) { (responseData, error) in
+        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOnly)
+        request?.saveToCache(data)
+        
+        AwesomeNetwork.requestData(with: request) { (responseData, error) in
             exp.fulfill()
             XCTAssertEqual(data, responseData)
         }
