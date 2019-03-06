@@ -26,12 +26,8 @@ public class AwesomeRequester: NSObject {
     /// Fetch data from URL with NSUrlSession
     ///
     /// - Parameters:
-    ///   - urlString: Url to fetch data form
-    ///   - method: URL method to fetch data using URLMethod enum
-    ///   - bodyData: Request body data
-    ///   - headers: Any header values to complete the request
-    ///   - timeout: When true it will force an update by fetching content from the given URL and storing it in URLCache.
-    ///   - usingDispatchQueue: Allows choice if using or not the dispatch queue
+    ///   - request: Parameters for request
+    ///   - useSemaphore: Choice to use or not semaphore
     ///   - completion: Returns fetched NSData in a block
     /// - Returns: URLSessionDataTask
     func performRequest(_ request: AwesomeRequestParameters?,

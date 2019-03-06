@@ -114,4 +114,51 @@ class AwesomeNetworkTests: XCTestCase {
         
         wait(for: [exp], timeout: 1)
     }
+    
+    func testRequestGeneric() {
+        let url: String = "https://google.com"
+        let method: URLMethod = .GET
+        let mockObject = CodableObjectMock(name: UUID().uuidString)
+        let data = try! mockObject.encode()
+        
+        let exp = expectation(description: "testResponseFromCacheOrUrlWithCache")
+        exp.expectedFulfillmentCount = 1
+        
+        AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: data, expectedError: nil)
+        
+        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOnly)
+        request?.saveToCache(data)
+        
+        AwesomeNetwork.requestGeneric(with: request) { (object: CodableObjectMock?, error) in
+            exp.fulfill()
+            XCTAssertEqual(object?.name, mockObject.name)
+        }
+        
+        wait(for: [exp], timeout: 1)
+    }
+    
+    func testRequestGenericArray() {
+        let url: String = "https://google.com"
+        let method: URLMethod = .GET
+        let mockObjects = [CodableObjectMock(name: UUID().uuidString),
+                           CodableObjectMock(name: UUID().uuidString),
+                           CodableObjectMock(name: UUID().uuidString)]
+        let data = "[{\"name\": \"\(mockObjects[0].name!)\"},{\"name\": \"\(mockObjects[1].name!)\"},{\"name\": \"\(mockObjects[2].name!)\"}]".data(using: .utf8)
+        
+        let exp = expectation(description: "testResponseFromCacheOrUrlWithCache")
+        exp.expectedFulfillmentCount = 1
+        
+        AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: data, expectedError: nil)
+        
+        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOnly)
+        request?.saveToCache(data)
+        
+        AwesomeNetwork.requestGenericArray(with: request) { (objects: [CodableObjectMock], error) in
+            exp.fulfill()
+            XCTAssertEqual(objects.count, mockObjects.count)
+            XCTAssertEqual(objects.first?.name, mockObjects.first?.name)
+        }
+        
+        wait(for: [exp], timeout: 1)
+    }
 }

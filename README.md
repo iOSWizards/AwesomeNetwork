@@ -79,6 +79,7 @@ AANetworking.requestData(_ request: AwesomeRequestParameters?,
 ```
 
 **Generic Request: (Codable)**
+
 ```swift
 /// Returns data either from cache or from URL
 ///
@@ -99,7 +100,6 @@ requestGeneric(with: AwesomeRequestParameters?,
 requestGenericArray(with: AwesomeRequestParameters?,
                     completion:@escaping (someArray: [SomeCodableClass], AwesomeError?)
 ```
-
 
 #### Downloading
 

@@ -24,6 +24,7 @@
 		950B4442222FD03B004FFE58 /* AwesomeRequesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E1222FBBC6004FFE58 /* AwesomeRequesterTests.swift */; };
 		950B4443222FD03B004FFE58 /* AwesomeRequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E2222FBBC6004FFE58 /* AwesomeRequestManagerTests.swift */; };
 		950B4444222FD03B004FFE58 /* AwesomeDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E3222FBBC6004FFE58 /* AwesomeDispatcherTests.swift */; };
+		950B444D222FF2E9004FFE58 /* CodableObjectMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B444C222FF2E8004FFE58 /* CodableObjectMock.swift */; };
 		CC6E547D33278250F97D2E7B /* Pods_AwesomeNetwork_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35941151E0945B29A60272C2 /* Pods_AwesomeNetwork_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		950B442E222FCF5D004FFE58 /* AwesomeNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		950B4432222FCF5D004FFE58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		950B4439222FCFD0004FFE58 /* AwesomeNetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeNetworkTests.swift; sourceTree = "<group>"; };
+		950B444C222FF2E8004FFE58 /* CodableObjectMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableObjectMock.swift; sourceTree = "<group>"; };
 		A6D977752E27D42D17FB5F9B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		B829BC58E37B17AA8DD43248 /* Pods-AwesomeNetwork_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Tests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeNetwork_Tests/Pods-AwesomeNetwork_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE990C36639356B38DB73EA7 /* Pods-AwesomeNetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetworkTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeNetworkTests/Pods-AwesomeNetworkTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 			children = (
 				950B43E5222FBBC7004FFE58 /* AwesomeUploadMock.swift */,
 				950B43E6222FBBC7004FFE58 /* AwesomeRequesterMock.swift */,
+				950B444C222FF2E8004FFE58 /* CodableObjectMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				950B443B222FD03B004FFE58 /* AwesomeCacheManagerTests.swift in Sources */,
 				950B443D222FD03B004FFE58 /* URLExtensionsTests.swift in Sources */,
 				950B4442222FD03B004FFE58 /* AwesomeRequesterTests.swift in Sources */,
+				950B444D222FF2E9004FFE58 /* CodableObjectMock.swift in Sources */,
 				950B4444222FD03B004FFE58 /* AwesomeDispatcherTests.swift in Sources */,
 				950B443A222FCFD0004FFE58 /* AwesomeNetworkTests.swift in Sources */,
 				950B4440222FD03B004FFE58 /* AwesomeUploadMock.swift in Sources */,
