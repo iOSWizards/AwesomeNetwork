@@ -3,9 +3,8 @@ use_frameworks!
 target 'AwesomeNetwork_Example' do
   pod 'AwesomeNetwork', :path => '../'
 
-  target 'AwesomeNetwork_Tests' do
+  target 'AwesomeNetworkTests' do
     inherit! :search_paths
-
     
   end
 end

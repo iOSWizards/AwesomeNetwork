@@ -1,168 +1,140 @@
 //
 //  AwesomeNetwork.swift
-//  MVA Home
+//  AwesomeNetwork
 //
-//  Created by Antonio da Silva on 20/02/2017.
-//  Copyright © 2017 Mindvalley. All rights reserved.
+//  Created by Evandro Harrison Hoffmann on 25/02/2019.
+//  Copyright © 2019 Awesome. All rights reserved.
 //
 
-import Foundation
-import Reachability
-
-public enum NetworkStateEvent: String {
-    case connected
-    case disconnected
-}
-
-public struct AwesomeNetwork {
-
-    public static var shared = AwesomeNetwork()
+public class AwesomeNetwork {
     
-    private let reachability = Reachability()
+    public static var shared: AwesomeNetwork = AwesomeNetwork()
     
-    // MARK: - AwesomeNetwork lifecycle
+    public var useSemaphore: Bool = false
+    public var defaultDispatchQueue: DispatchQueue = .global(qos: .default)
+    public var defaultCacheRule: AwesomeCacheRule = .fromCacheOrUrl
+    public var defaultRequestTimeout: TimeInterval = 15
+    public var retryTimeout: TimeInterval = 1
+    public var cacheManager: AwesomeCacheManager?
+    public var requester: AwesomeRequester?
+    public var uploader: AwesomeUpload?
+    let reachability = AwesomeReachability()
     
-    public func startNetworkStateNotifier() {
-        reachability?.whenReachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
-            DispatchQueue.main.async {
-                if reachability.connection != .none {
-                    print("AwesomeNetwork: Reachable via \(reachability.connection.description)")
-                    self.postNotification(with: .connected)
-                }
-            }
-        }
-        reachability?.whenUnreachable = { reachability in
-            // this is called on a background thread, but UI updates must
-            // be on the main thread, like this:
-            DispatchQueue.main.async {
-                print("AwesomeNetwork: Not reachable")
-                self.postNotification(with: .disconnected)
-            }
-        }
-        
-        do {
-            try reachability?.startNotifier()
-        } catch {
-            print("AwesomeNetwork: Unable to start notifier")
-        }
+    public static func start(useSemaphore: Bool = false,
+                             defaultDispatchQueue: DispatchQueue = .global(qos: .default),
+                             defaultRequestTimeout: TimeInterval = 15,
+                             defaultCacheRule: AwesomeCacheRule = .fromCacheOrUrl,
+                             retryTimeout: TimeInterval = 1,
+                             cacheType: AwesomeCacheType = .realm) {
+        shared.useSemaphore = useSemaphore
+        shared.defaultDispatchQueue = defaultDispatchQueue
+        shared.defaultCacheRule = defaultCacheRule
+        shared.defaultRequestTimeout = defaultRequestTimeout
+        shared.retryTimeout = retryTimeout
+        shared.cacheManager = AwesomeCacheManager(cacheType: cacheType)
+        shared.requester = AwesomeRequester()
+        shared.uploader = AwesomeUpload()
     }
     
-    public func stopNetworkStateNotifier() {
-        reachability?.stopNotifier()
+    public static func releaseDispatchQueue() {
+        AwesomeDispatcher.shared.releaseSemaphore()
     }
     
-    public func isWifiConnected(viewController: UIViewController,
-                                noConnectionMessage: String,
-                                okButtonTitle: String = "Ok",
-                                onPress: (() -> Void)? = nil) -> Bool {
-        
-        if reachability?.connection == .wifi {
-            return true
-        } else {
-            viewController.showAlert(message: noConnectionMessage, completion: {
-            }, buttons: (UIAlertAction.Style.default, okButtonTitle, onPress))
-            
-        }
-        
-        return false
+    public static func clearCache() {
+        shared.cacheManager?.clearCache()
     }
     
-    // MARK: - State Notifier
-    
-    /*
-     * True if Internet connection is reachable either by WiFi or Cellular and false in any other case.
-     */
-    public func isReachable(viewController: UIViewController,
-                            noConnectionMessage: String,
-                            okButtonTitle: String = "Ok",
-                            onPress: (() -> Void)? = nil) -> Bool {
-        if isReachable {
-            return true
-        }
-        
-        viewController.showAlert(message: noConnectionMessage, completion: {
-        }, buttons: (UIAlertAction.Style.default, okButtonTitle, onPress))
-        
-        return false
+    public static func cancelAllRequests() {
+        shared.requester?.requestManager.cancelAllRequests()
+        shared.uploader?.requestManager.cancelAllRequests()
     }
     
-    public var isReachable: Bool {
-        return reachability?.connection != .none
-    }
-    
-    public var isWifiReachable: Bool {
-        return reachability?.connection == .wifi
-    }
-    
-    public var isCellularReachable: Bool {
-        return reachability?.connection == .cellular
-    }
-    
-    public func addObserver(_ observer: Any, selector: Selector, event: NetworkStateEvent) {
-        NotificationCenter.default.addObserver(observer, selector: selector, name: notificationName(with: event), object: nil)
-    }
-    
-    public func removeObserver(_ observer: Any) {
-        NotificationCenter.default.removeObserver(observer)
-    }
-    
-    // MARK: - Helpers
-    
-    private func postNotification(with event: NetworkStateEvent) {
-        NotificationCenter.default.post(name: notificationName(with: event), object: nil)
-    }
-    
-    private func notificationName(with event: NetworkStateEvent) -> NSNotification.Name {
-        return NSNotification.Name(rawValue: event.rawValue)
-    }
-   
-    public static func startNetworkStateNotifier() {
-        shared.startNetworkStateNotifier()
-    }
-    
-    public static func stopNetworkStateNotifier() {
-        shared.stopNetworkStateNotifier()
-    }
-    
-}
-
-extension UIView {
-    public func listenToNetwork(onChange: @escaping (Bool) -> Void) {
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: NetworkStateEvent.connected.rawValue), object: nil, queue: .main) { (_) in
-            onChange(true)
-        }
-        
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: NetworkStateEvent.disconnected.rawValue), object: nil, queue: .main) { (_) in
-            onChange(false)
-        }
-    }
-}
-
-extension UIViewController {
-    
-    func showAlert(withTitle title: String? = nil, message: String?,  completion: (() -> ())? = nil, buttons: (UIAlertAction.Style, String, (() -> ())?)...) {
-        
-        guard let message = message, message.count > 0 else {
+    /// Returns data either from cache or from URL
+    ///
+    /// - Parameters:
+    ///   - urlString: URL String
+    ///   - cacheRule: Choose from Cache or URL, default is cache falling back to URL
+    ///   - method: URL Method
+    ///   - bodyData: Data body if any
+    ///   - headers: Dictionary of headers
+    ///   - timeout: Timeout time in seconds
+    ///   - queue: Dispatch queue for request
+    ///   - retryCount: Retry count before giving up
+    ///   - completion: (data, errorData)
+    public static func requestData(from urlString: String?,
+                                   cacheRule: AwesomeCacheRule = shared.defaultCacheRule,
+                                   method: URLMethod = .GET,
+                                   bodyData: Data? = nil,
+                                   headers: [String: String]? = nil,
+                                   queryItems: [URLQueryItem]? = nil,
+                                   timeoutAfter timeout: TimeInterval = shared.defaultRequestTimeout,
+                                   usingDispatchQueue queue: DispatchQueue? = nil,
+                                   retryCount: Int = 0,
+                                   completion:@escaping AwesomeDataResponse) {
+        guard let urlString = urlString else {
+            completion(nil, AwesomeError.invalidUrl)
             return
         }
         
-        if #available(iOS 8.0, *){
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.modalPresentationStyle = UIDevice.current.userInterfaceIdiom == .pad ? .popover : .currentContext
-            
-            for button in buttons {
-                alertController.addAction(UIAlertAction(title: button.1, style: button.0) { (_: UIAlertAction!) in
-                    if let completion = completion { completion() }
-                    if let actionBlock = button.2 { actionBlock() }
-                })
+        var didReturnCache: Bool = false
+        
+        // gets from cache if any
+        if cacheRule.shouldGetFromCache,
+            let data = shared.cacheManager?.verifyForCache(withUrl: urlString, method: method, body: bodyData) {
+            completion(data, nil)
+            didReturnCache = true
+        }
+        
+        // proceed to url if set in cache rule
+        guard cacheRule.shouldGetFromUrl(didReturnCache: didReturnCache) else {
+            if !didReturnCache {
+                completion(nil, AwesomeError.cacheRule("Cache rule set to get only from cache, but there was no cache for this URL request."))
             }
-            self.present(alertController, animated: true, completion: nil)
-        }else {
-            // Handle prior iOS Versions
+            return
+        }
+    
+        shared.requester?.performRequest(urlString,
+                                         method: method,
+                                         bodyData: bodyData,
+                                         headers: headers,
+                                         queryItems: queryItems,
+                                         timeoutAfter: timeout,
+                                         useSemaphore: shared.useSemaphore,
+                                         queue: queue) { (data, error) in
+            // caches data
+            shared.cacheManager?.saveCache(withUrl: urlString, method: method, body: bodyData, data: data)
             
+            completion(data, error)
         }
     }
     
+    static func requestGeneric<T: Decodable>(from urlString: String?,
+                                             cacheRule: AwesomeCacheRule = shared.defaultCacheRule,
+                                             method: URLMethod = .GET,
+                                             bodyData: Data? = nil,
+                                             headers: [String: String]? = nil,
+                                             queryItems: [URLQueryItem]? = nil,
+                                             timeoutAfter timeout: TimeInterval = shared.defaultRequestTimeout,
+                                             usingDispatchQueue queue: DispatchQueue? = nil,
+                                             retryCount: Int = 0,
+                                             completion:@escaping (T?, AwesomeError?) -> Void) {
+        requestData(from: urlString, cacheRule: cacheRule, method: method, bodyData: bodyData, headers: headers, queryItems: queryItems, timeoutAfter: timeout, usingDispatchQueue: queue, retryCount: retryCount) { (data, error) in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            guard let data = data else {
+                completion(nil, AwesomeError.unknown("No error from server and Data is nil."))
+                return
+            }
+            
+            do {
+                let generic = try JSONDecoder().decode(T.self, from: data)
+                completion(generic, nil)
+            } catch {
+                completion(nil, AwesomeError.parse(error.localizedDescription))
+            }
+        }
+    }
 }

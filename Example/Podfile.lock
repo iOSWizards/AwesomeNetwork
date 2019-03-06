@@ -1,23 +1,29 @@
 PODS:
-  - AwesomeNetwork (0.1.7):
-    - ReachabilitySwift (~> 4)
-  - ReachabilitySwift (4.1.0)
+  - AwesomeNetwork (0.2.0):
+    - RealmSwift
+  - Realm (3.13.1):
+    - Realm/Headers (= 3.13.1)
+  - Realm/Headers (3.13.1)
+  - RealmSwift (3.13.1):
+    - Realm (= 3.13.1)
 
 DEPENDENCIES:
   - AwesomeNetwork (from `../`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - ReachabilitySwift
+    - Realm
+    - RealmSwift
 
 EXTERNAL SOURCES:
   AwesomeNetwork:
     :path: "../"
 
 SPEC CHECKSUMS:
-  AwesomeNetwork: f2a0d161a531da9bcab3e853684d147b3c061fac
-  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  AwesomeNetwork: ff1854df564ea52c34cf874aed399f17998946c3
+  Realm: 50071da38fe079e0735e47c9f2eae738c68c5996
+  RealmSwift: 8a1e6a02b7a08cd17a31e3115143fb69fe5f3fb9
 
-PODFILE CHECKSUM: 236e9af44b17f43add198679bcdd3a3684874910
+PODFILE CHECKSUM: 99b471cedaf2bdcb34b09c8d8c2a2b313baee8c8
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
