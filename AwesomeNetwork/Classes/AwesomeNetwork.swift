@@ -33,7 +33,6 @@ public class AwesomeNetwork {
         shared.retryTimeout = retryTimeout
         shared.cacheManager = AwesomeCacheManager(cacheType: cacheType)
         shared.requester = AwesomeRequester()
-        shared.uploader = AwesomeUpload()
     }
     
     public static func releaseDispatchQueue() {
@@ -46,7 +45,7 @@ public class AwesomeNetwork {
     
     public static func cancelAllRequests() {
         shared.requester?.requestManager.cancelAllRequests()
-        shared.uploader?.requestManager.cancelAllRequests()
+        AwesomeUpload.shared.requestManager.cancelAllRequests()
     }
     
     public static func requestData(with request: AwesomeRequestParameters?,

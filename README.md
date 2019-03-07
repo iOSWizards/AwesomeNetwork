@@ -101,6 +101,15 @@ requestGenericArray(with: AwesomeRequestParameters?,
                     completion:@escaping (someArray: [SomeCodableClass], AwesomeError?)
 ```
 
+#### Uploading
+
+```swift
+AwesomeDownload.shared.upload(_ uploadData: Data?,
+                              to: String?,
+                              headers: AARequesterHeader? = nil,
+                              completion: @escaping AwesomeUploadResponse)
+```
+
 #### Downloading
 
 ```swift

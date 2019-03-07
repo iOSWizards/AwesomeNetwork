@@ -11,6 +11,8 @@ public typealias AwesomeUploadResponse = (Data?, AwesomeError?) -> Void
 
 public class AwesomeUpload: NSObject {
     
+    public static var shared: AwesomeUpload = AwesomeUpload()
+    
     var requestManager: AwesomeRequestManager = AwesomeRequestManager()
     
     func upload(_ uploadData: Data?,
@@ -31,8 +33,8 @@ public class AwesomeUpload: NSObject {
                                             method: .POST,
                                             headers: headers)
         
-        let task = URLSession.shared.uploadTask(with: urlRequest, from: uploadData) { data, response, error in
-            self.requestManager.removeRequest(to: url)
+        let task = URLSession.shared.uploadTask(with: urlRequest, from: uploadData) { [weak self] data, response, error in
+            self?.requestManager.removeRequest(to: url)
             
             if let error = error {
                 completion(nil, AwesomeError.uploadFailed(error.localizedDescription))

@@ -167,12 +167,12 @@
 			path = Mocks;
 			sourceTree = "<group>";
 		};
-		950B43E8222FBBC7004FFE58 /* Downloading */ = {
+		950B43E8222FBBC7004FFE58 /* Uploading */ = {
 			isa = PBXGroup;
 			children = (
 				950B43E9222FBBC7004FFE58 /* AwesomeUploadTests.swift */,
 			);
-			path = Downloading;
+			path = Uploading;
 			sourceTree = "<group>";
 		};
 		950B43EA222FBBC7004FFE58 /* Extensions */ = {
@@ -198,7 +198,7 @@
 			children = (
 				950B4439222FCFD0004FFE58 /* AwesomeNetworkTests.swift */,
 				950B43EE222FBBC7004FFE58 /* Caching */,
-				950B43E8222FBBC7004FFE58 /* Downloading */,
+				950B43E8222FBBC7004FFE58 /* Uploading */,
 				950B43EA222FBBC7004FFE58 /* Extensions */,
 				950B43E4222FBBC7004FFE58 /* Mocks */,
 				950B43E0222FBBC6004FFE58 /* Networking */,

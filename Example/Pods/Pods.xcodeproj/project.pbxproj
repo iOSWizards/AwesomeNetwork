@@ -607,6 +607,7 @@
 				7DE16EFCEF797D0E7259DA04F4650EA1 /* AwesomeNetwork+Reachability.swift */,
 				A69648AC2EFA7E2E190654DE93625EAE /* Caching */,
 				C0BCBF1C61E71C2FD6A7491EA1784D52 /* Downloading */,
+				95F650E62231018100616FCC /* Uploading */,
 				539CD9413E62139B7FA9A4D9F242EB0C /* Extensions */,
 				6B08B39B926DFB70931886570B4A6FB9 /* Networking */,
 				F2DF435D67BC4C72D2AAF0A53C839D25 /* Pod */,
@@ -804,6 +805,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		95F650E62231018100616FCC /* Uploading */ = {
+			isa = PBXGroup;
+			children = (
+				FAE07A92E672C31BD9F04926523C10C7 /* AwesomeUpload.swift */,
+			);
+			name = Uploading;
+			path = AwesomeNetwork/Classes/Uploading;
+			sourceTree = "<group>";
+		};
 		A69648AC2EFA7E2E190654DE93625EAE /* Caching */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,7 +839,6 @@
 			children = (
 				A3E119BE29721A7061D788314C979864 /* AwesomeDownload.swift */,
 				84E8F908ACAF1CA2E73A12F1948F8E5C /* AwesomeDownloadManager.swift */,
-				FAE07A92E672C31BD9F04926523C10C7 /* AwesomeUpload.swift */,
 			);
 			name = Downloading;
 			path = AwesomeNetwork/Classes/Downloading;
