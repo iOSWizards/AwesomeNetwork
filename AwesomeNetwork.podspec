@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'AwesomeNetwork'
-  s.version          = '0.1.7'
-  s.summary          = 'Network state handling.'
+  s.version          = '0.2.0'
+  s.summary          = 'Network handling.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-Network state handling.
+Network handling.
                        DESC
 
   s.homepage         = 'https://github.com/iOSWizards/AwesomeNetwork'
@@ -38,5 +38,5 @@ Network state handling.
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
-  s.dependency 'ReachabilitySwift', '~> 4'
+  s.dependency 'RealmSwift'
 end

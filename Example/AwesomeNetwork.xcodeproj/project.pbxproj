@@ -7,30 +7,44 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		27434969F275585E492B58E8 /* Pods_AwesomeNetworkTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DF96A534512E4027C5DC645 /* Pods_AwesomeNetworkTests.framework */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
-		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
-		63CAC2349C5C7F7D63A55725 /* Pods_AwesomeNetwork_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD1632121B818D0185EBCE1 /* Pods_AwesomeNetwork_Example.framework */; };
-		8845E329382CDB26D48A3CE7 /* Pods_AwesomeNetwork_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE49BE3294B72036002D7D40 /* Pods_AwesomeNetwork_Tests.framework */; };
+		950B443A222FCFD0004FFE58 /* AwesomeNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B4439222FCFD0004FFE58 /* AwesomeNetworkTests.swift */; };
+		950B443B222FD03B004FFE58 /* AwesomeCacheManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43EF222FBBC7004FFE58 /* AwesomeCacheManagerTests.swift */; };
+		950B443C222FD03B004FFE58 /* AwesomeUploadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E9222FBBC7004FFE58 /* AwesomeUploadTests.swift */; };
+		950B443D222FD03B004FFE58 /* URLExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43EB222FBBC7004FFE58 /* URLExtensionsTests.swift */; };
+		950B443E222FD03B004FFE58 /* StringExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43EC222FBBC7004FFE58 /* StringExtensionsTests.swift */; };
+		950B443F222FD03B004FFE58 /* URLRequestExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43ED222FBBC7004FFE58 /* URLRequestExtensionsTests.swift */; };
+		950B4440222FD03B004FFE58 /* AwesomeUploadMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E5222FBBC7004FFE58 /* AwesomeUploadMock.swift */; };
+		950B4441222FD03B004FFE58 /* AwesomeRequesterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E6222FBBC7004FFE58 /* AwesomeRequesterMock.swift */; };
+		950B4442222FD03B004FFE58 /* AwesomeRequesterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E1222FBBC6004FFE58 /* AwesomeRequesterTests.swift */; };
+		950B4443222FD03B004FFE58 /* AwesomeRequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E2222FBBC6004FFE58 /* AwesomeRequestManagerTests.swift */; };
+		950B4444222FD03B004FFE58 /* AwesomeDispatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B43E3222FBBC6004FFE58 /* AwesomeDispatcherTests.swift */; };
+		950B444D222FF2E9004FFE58 /* CodableObjectMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B444C222FF2E8004FFE58 /* CodableObjectMock.swift */; };
+		95341F24223418C900CD385A /* AwesomeParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95341F23223418C900CD385A /* AwesomeParserTests.swift */; };
+		95341F26223418F900CD385A /* AwesomeRequesterProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95341F25223418F900CD385A /* AwesomeRequesterProtocolTests.swift */; };
+		CC6E547D33278250F97D2E7B /* Pods_AwesomeNetwork_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35941151E0945B29A60272C2 /* Pods_AwesomeNetwork_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		607FACE61AFB9204008FA782 /* PBXContainerItemProxy */ = {
+		950B4433222FCF5D004FFE58 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 607FACC81AFB9204008FA782 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 607FACCF1AFB9204008FA782;
-			remoteInfo = AwesomeNetwork;
+			remoteInfo = AwesomeNetwork_Example;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0C1E65AD83C246EA1EA85089 /* AwesomeNetwork.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = AwesomeNetwork.podspec; path = ../AwesomeNetwork.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		55A8B8C29AC0D1C9FB3CAE25 /* Pods-AwesomeNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
-		55D2304FCE63275DCBF4B49C /* Pods-AwesomeNetwork_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AwesomeNetwork_Tests/Pods-AwesomeNetwork_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		2764A3AE00689EDC268FC56E /* Pods-AwesomeNetwork_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Example.release.xcconfig"; path = "Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example.release.xcconfig"; sourceTree = "<group>"; };
+		2DE7654B9F4F82D54B3CE586 /* Pods-AwesomeNetworkTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetworkTests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeNetworkTests/Pods-AwesomeNetworkTests.debug.xcconfig"; sourceTree = "<group>"; };
+		35941151E0945B29A60272C2 /* Pods_AwesomeNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeNetwork_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* AwesomeNetwork_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeNetwork_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,15 +52,30 @@
 		607FACDA1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		607FACDC1AFB9204008FA782 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		607FACDF1AFB9204008FA782 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		607FACE51AFB9204008FA782 /* AwesomeNetwork_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeNetwork_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		8044FEEAA898368854F0696E /* Pods_AwesomeNetwork_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeNetwork_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8DF96A534512E4027C5DC645 /* Pods_AwesomeNetworkTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeNetworkTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		94120FFE03189A78B286BA2F /* Pods-AwesomeNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Example.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		950B43E1222FBBC6004FFE58 /* AwesomeRequesterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeRequesterTests.swift; sourceTree = "<group>"; };
+		950B43E2222FBBC6004FFE58 /* AwesomeRequestManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeRequestManagerTests.swift; sourceTree = "<group>"; };
+		950B43E3222FBBC6004FFE58 /* AwesomeDispatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeDispatcherTests.swift; sourceTree = "<group>"; };
+		950B43E5222FBBC7004FFE58 /* AwesomeUploadMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeUploadMock.swift; sourceTree = "<group>"; };
+		950B43E6222FBBC7004FFE58 /* AwesomeRequesterMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeRequesterMock.swift; sourceTree = "<group>"; };
+		950B43E9222FBBC7004FFE58 /* AwesomeUploadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeUploadTests.swift; sourceTree = "<group>"; };
+		950B43EB222FBBC7004FFE58 /* URLExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtensionsTests.swift; sourceTree = "<group>"; };
+		950B43EC222FBBC7004FFE58 /* StringExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionsTests.swift; sourceTree = "<group>"; };
+		950B43ED222FBBC7004FFE58 /* URLRequestExtensionsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestExtensionsTests.swift; sourceTree = "<group>"; };
+		950B43EF222FBBC7004FFE58 /* AwesomeCacheManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeCacheManagerTests.swift; sourceTree = "<group>"; };
+		950B442E222FCF5D004FFE58 /* AwesomeNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		950B4432222FCF5D004FFE58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		950B4439222FCFD0004FFE58 /* AwesomeNetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeNetworkTests.swift; sourceTree = "<group>"; };
+		950B444C222FF2E8004FFE58 /* CodableObjectMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableObjectMock.swift; sourceTree = "<group>"; };
+		95341F23223418C900CD385A /* AwesomeParserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeParserTests.swift; sourceTree = "<group>"; };
+		95341F25223418F900CD385A /* AwesomeRequesterProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeRequesterProtocolTests.swift; sourceTree = "<group>"; };
 		A6D977752E27D42D17FB5F9B /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		BA64959151228669EF771580 /* Pods-AwesomeNetwork_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AwesomeNetwork_Tests/Pods-AwesomeNetwork_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		BE49BE3294B72036002D7D40 /* Pods_AwesomeNetwork_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeNetwork_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DBD1632121B818D0185EBCE1 /* Pods_AwesomeNetwork_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AwesomeNetwork_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EDF072D7D69120BAD6232306 /* Pods-AwesomeNetwork_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		B829BC58E37B17AA8DD43248 /* Pods-AwesomeNetwork_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Tests.debug.xcconfig"; path = "Target Support Files/Pods-AwesomeNetwork_Tests/Pods-AwesomeNetwork_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		DE990C36639356B38DB73EA7 /* Pods-AwesomeNetworkTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetworkTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeNetworkTests/Pods-AwesomeNetworkTests.release.xcconfig"; sourceTree = "<group>"; };
 		F1200D70960B037B3869F824 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F97C8232D328E04657BE5899 /* Pods-AwesomeNetwork_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeNetwork_Tests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeNetwork_Tests/Pods-AwesomeNetwork_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,41 +83,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CAC2349C5C7F7D63A55725 /* Pods_AwesomeNetwork_Example.framework in Frameworks */,
+				CC6E547D33278250F97D2E7B /* Pods_AwesomeNetwork_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE21AFB9204008FA782 /* Frameworks */ = {
+		950B442B222FCF5D004FFE58 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8845E329382CDB26D48A3CE7 /* Pods_AwesomeNetwork_Tests.framework in Frameworks */,
+				27434969F275585E492B58E8 /* Pods_AwesomeNetworkTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1F06512815DF58096669359D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EDF072D7D69120BAD6232306 /* Pods-AwesomeNetwork_Example.debug.xcconfig */,
-				55A8B8C29AC0D1C9FB3CAE25 /* Pods-AwesomeNetwork_Example.release.xcconfig */,
-				BA64959151228669EF771580 /* Pods-AwesomeNetwork_Tests.debug.xcconfig */,
-				55D2304FCE63275DCBF4B49C /* Pods-AwesomeNetwork_Tests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for AwesomeNetwork */,
-				607FACE81AFB9204008FA782 /* Tests */,
+				950B442F222FCF5D004FFE58 /* AwesomeNetworkTests */,
 				607FACD11AFB9204008FA782 /* Products */,
-				1F06512815DF58096669359D /* Pods */,
-				8EE4DC84ED3DF970485F8334 /* Frameworks */,
+				A40B8344895CDACFBDC2C346 /* Pods */,
+				987D0EB6C553ED4AAD317E6A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,7 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD01AFB9204008FA782 /* AwesomeNetwork_Example.app */,
-				607FACE51AFB9204008FA782 /* AwesomeNetwork_Tests.xctest */,
+				950B442E222FCF5D004FFE58 /* AwesomeNetworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,23 +141,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		607FACE81AFB9204008FA782 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEB1AFB9204008FA782 /* Tests.swift */,
-				607FACE91AFB9204008FA782 /* Supporting Files */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		607FACE91AFB9204008FA782 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				607FACEA1AFB9204008FA782 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		607FACF51AFB993E008FA782 /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,13 +151,97 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		8EE4DC84ED3DF970485F8334 /* Frameworks */ = {
+		950B43E0222FBBC6004FFE58 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				DBD1632121B818D0185EBCE1 /* Pods_AwesomeNetwork_Example.framework */,
-				BE49BE3294B72036002D7D40 /* Pods_AwesomeNetwork_Tests.framework */,
+				95341F25223418F900CD385A /* AwesomeRequesterProtocolTests.swift */,
+				950B43E1222FBBC6004FFE58 /* AwesomeRequesterTests.swift */,
+				950B43E2222FBBC6004FFE58 /* AwesomeRequestManagerTests.swift */,
+				950B43E3222FBBC6004FFE58 /* AwesomeDispatcherTests.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		950B43E4222FBBC7004FFE58 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				950B43E5222FBBC7004FFE58 /* AwesomeUploadMock.swift */,
+				950B43E6222FBBC7004FFE58 /* AwesomeRequesterMock.swift */,
+				950B444C222FF2E8004FFE58 /* CodableObjectMock.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		950B43E8222FBBC7004FFE58 /* Uploading */ = {
+			isa = PBXGroup;
+			children = (
+				950B43E9222FBBC7004FFE58 /* AwesomeUploadTests.swift */,
+			);
+			path = Uploading;
+			sourceTree = "<group>";
+		};
+		950B43EA222FBBC7004FFE58 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				950B43EB222FBBC7004FFE58 /* URLExtensionsTests.swift */,
+				950B43EC222FBBC7004FFE58 /* StringExtensionsTests.swift */,
+				950B43ED222FBBC7004FFE58 /* URLRequestExtensionsTests.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		950B43EE222FBBC7004FFE58 /* Caching */ = {
+			isa = PBXGroup;
+			children = (
+				950B43EF222FBBC7004FFE58 /* AwesomeCacheManagerTests.swift */,
+			);
+			path = Caching;
+			sourceTree = "<group>";
+		};
+		950B442F222FCF5D004FFE58 /* AwesomeNetworkTests */ = {
+			isa = PBXGroup;
+			children = (
+				950B4439222FCFD0004FFE58 /* AwesomeNetworkTests.swift */,
+				950B43EE222FBBC7004FFE58 /* Caching */,
+				950B43E8222FBBC7004FFE58 /* Uploading */,
+				950B43EA222FBBC7004FFE58 /* Extensions */,
+				950B43E4222FBBC7004FFE58 /* Mocks */,
+				95341F22223418C900CD385A /* Parser */,
+				950B43E0222FBBC6004FFE58 /* Networking */,
+				950B4432222FCF5D004FFE58 /* Info.plist */,
+			);
+			path = AwesomeNetworkTests;
+			sourceTree = "<group>";
+		};
+		95341F22223418C900CD385A /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				95341F23223418C900CD385A /* AwesomeParserTests.swift */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		987D0EB6C553ED4AAD317E6A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				35941151E0945B29A60272C2 /* Pods_AwesomeNetwork_Example.framework */,
+				8044FEEAA898368854F0696E /* Pods_AwesomeNetwork_Tests.framework */,
+				8DF96A534512E4027C5DC645 /* Pods_AwesomeNetworkTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A40B8344895CDACFBDC2C346 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				94120FFE03189A78B286BA2F /* Pods-AwesomeNetwork_Example.debug.xcconfig */,
+				2764A3AE00689EDC268FC56E /* Pods-AwesomeNetwork_Example.release.xcconfig */,
+				B829BC58E37B17AA8DD43248 /* Pods-AwesomeNetwork_Tests.debug.xcconfig */,
+				F97C8232D328E04657BE5899 /* Pods-AwesomeNetwork_Tests.release.xcconfig */,
+				2DE7654B9F4F82D54B3CE586 /* Pods-AwesomeNetworkTests.debug.xcconfig */,
+				DE990C36639356B38DB73EA7 /* Pods-AwesomeNetworkTests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,11 +251,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACEF1AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AwesomeNetwork_Example" */;
 			buildPhases = (
-				73E30387B222D9701794AB76 /* [CP] Check Pods Manifest.lock */,
+				6577B7603A054C31D889C4F3 /* [CP] Check Pods Manifest.lock */,
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				949F40EB9B52E27A7F8D73DB /* [CP] Embed Pods Frameworks */,
+				4A2F0AD2124857722991582E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -181,23 +266,23 @@
 			productReference = 607FACD01AFB9204008FA782 /* AwesomeNetwork_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		607FACE41AFB9204008FA782 /* AwesomeNetwork_Tests */ = {
+		950B442D222FCF5D004FFE58 /* AwesomeNetworkTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AwesomeNetwork_Tests" */;
+			buildConfigurationList = 950B4435222FCF5E004FFE58 /* Build configuration list for PBXNativeTarget "AwesomeNetworkTests" */;
 			buildPhases = (
-				F98E80554C237D33C51DA9CD /* [CP] Check Pods Manifest.lock */,
-				607FACE11AFB9204008FA782 /* Sources */,
-				607FACE21AFB9204008FA782 /* Frameworks */,
-				607FACE31AFB9204008FA782 /* Resources */,
+				2883ED14D3A00EDE492F0588 /* [CP] Check Pods Manifest.lock */,
+				950B442A222FCF5D004FFE58 /* Sources */,
+				950B442B222FCF5D004FFE58 /* Frameworks */,
+				950B442C222FCF5D004FFE58 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				607FACE71AFB9204008FA782 /* PBXTargetDependency */,
+				950B4434222FCF5D004FFE58 /* PBXTargetDependency */,
 			);
-			name = AwesomeNetwork_Tests;
-			productName = Tests;
-			productReference = 607FACE51AFB9204008FA782 /* AwesomeNetwork_Tests.xctest */;
+			name = AwesomeNetworkTests;
+			productName = AwesomeNetworkTests;
+			productReference = 950B442E222FCF5D004FFE58 /* AwesomeNetworkTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -206,19 +291,20 @@
 		607FACC81AFB9204008FA782 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = CocoaPods;
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = 496E7TU5N4;
+						DevelopmentTeam = S2DSCP4F3H;
 						LastSwiftMigration = 0900;
 					};
-					607FACE41AFB9204008FA782 = {
-						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = A9Q5VPE9WX;
-						LastSwiftMigration = 0900;
+					950B442D222FCF5D004FFE58 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 829R8XF3MS;
+						LastSwiftMigration = 1010;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -237,7 +323,7 @@
 			projectRoot = "";
 			targets = (
 				607FACCF1AFB9204008FA782 /* AwesomeNetwork_Example */,
-				607FACE41AFB9204008FA782 /* AwesomeNetwork_Tests */,
+				950B442D222FCF5D004FFE58 /* AwesomeNetworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -253,7 +339,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE31AFB9204008FA782 /* Resources */ = {
+		950B442C222FCF5D004FFE58 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -263,56 +349,70 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		73E30387B222D9701794AB76 /* [CP] Check Pods Manifest.lock */ = {
+		2883ED14D3A00EDE492F0588 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AwesomeNetwork_Example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AwesomeNetworkTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		949F40EB9B52E27A7F8D73DB /* [CP] Embed Pods Frameworks */ = {
+		4A2F0AD2124857722991582E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AwesomeNetwork/AwesomeNetwork.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwesomeNetwork.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AwesomeNetwork_Example/Pods-AwesomeNetwork_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F98E80554C237D33C51DA9CD /* [CP] Check Pods Manifest.lock */ = {
+		6577B7603A054C31D889C4F3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AwesomeNetwork_Tests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-AwesomeNetwork_Example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -331,21 +431,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		607FACE11AFB9204008FA782 /* Sources */ = {
+		950B442A222FCF5D004FFE58 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				607FACEC1AFB9204008FA782 /* Tests.swift in Sources */,
+				95341F26223418F900CD385A /* AwesomeRequesterProtocolTests.swift in Sources */,
+				950B4443222FD03B004FFE58 /* AwesomeRequestManagerTests.swift in Sources */,
+				950B4441222FD03B004FFE58 /* AwesomeRequesterMock.swift in Sources */,
+				950B443B222FD03B004FFE58 /* AwesomeCacheManagerTests.swift in Sources */,
+				950B443D222FD03B004FFE58 /* URLExtensionsTests.swift in Sources */,
+				950B4442222FD03B004FFE58 /* AwesomeRequesterTests.swift in Sources */,
+				950B444D222FF2E9004FFE58 /* CodableObjectMock.swift in Sources */,
+				950B4444222FD03B004FFE58 /* AwesomeDispatcherTests.swift in Sources */,
+				950B443A222FCFD0004FFE58 /* AwesomeNetworkTests.swift in Sources */,
+				950B4440222FD03B004FFE58 /* AwesomeUploadMock.swift in Sources */,
+				950B443E222FD03B004FFE58 /* StringExtensionsTests.swift in Sources */,
+				950B443C222FD03B004FFE58 /* AwesomeUploadTests.swift in Sources */,
+				95341F24223418C900CD385A /* AwesomeParserTests.swift in Sources */,
+				950B443F222FD03B004FFE58 /* URLRequestExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		607FACE71AFB9204008FA782 /* PBXTargetDependency */ = {
+		950B4434222FCF5D004FFE58 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 607FACCF1AFB9204008FA782 /* AwesomeNetwork_Example */;
-			targetProxy = 607FACE61AFB9204008FA782 /* PBXContainerItemProxy */;
+			targetProxy = 950B4433222FCF5D004FFE58 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -476,10 +589,10 @@
 		};
 		607FACF01AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EDF072D7D69120BAD6232306 /* Pods-AwesomeNetwork_Example.debug.xcconfig */;
+			baseConfigurationReference = 94120FFE03189A78B286BA2F /* Pods-AwesomeNetwork_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 496E7TU5N4;
+				DEVELOPMENT_TEAM = S2DSCP4F3H;
 				INFOPLIST_FILE = AwesomeNetwork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -492,10 +605,10 @@
 		};
 		607FACF11AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55A8B8C29AC0D1C9FB3CAE25 /* Pods-AwesomeNetwork_Example.release.xcconfig */;
+			baseConfigurationReference = 2764A3AE00689EDC268FC56E /* Pods-AwesomeNetwork_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 496E7TU5N4;
+				DEVELOPMENT_TEAM = S2DSCP4F3H;
 				INFOPLIST_FILE = AwesomeNetwork/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
@@ -506,43 +619,63 @@
 			};
 			name = Release;
 		};
-		607FACF31AFB9204008FA782 /* Debug */ = {
+		950B4436222FCF5E004FFE58 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BA64959151228669EF771580 /* Pods-AwesomeNetwork_Tests.debug.xcconfig */;
+			baseConfigurationReference = 2DE7654B9F4F82D54B3CE586 /* Pods-AwesomeNetworkTests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = A9Q5VPE9WX;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 829R8XF3MS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AwesomeNetworkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ioswizards.AwesomeNetworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AwesomeNetwork_Example.app/AwesomeNetwork_Example";
 			};
 			name = Debug;
 		};
-		607FACF41AFB9204008FA782 /* Release */ = {
+		950B4437222FCF5E004FFE58 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 55D2304FCE63275DCBF4B49C /* Pods-AwesomeNetwork_Tests.release.xcconfig */;
+			baseConfigurationReference = DE990C36639356B38DB73EA7 /* Pods-AwesomeNetworkTests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = A9Q5VPE9WX;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Tests/Info.plist;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 829R8XF3MS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = AwesomeNetworkTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ioswizards.AwesomeNetworkTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AwesomeNetwork_Example.app/AwesomeNetwork_Example";
 			};
 			name = Release;
 		};
@@ -567,11 +700,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "AwesomeNetwork_Tests" */ = {
+		950B4435222FCF5E004FFE58 /* Build configuration list for PBXNativeTarget "AwesomeNetworkTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				607FACF31AFB9204008FA782 /* Debug */,
-				607FACF41AFB9204008FA782 /* Release */,
+				950B4436222FCF5E004FFE58 /* Debug */,
+				950B4437222FCF5E004FFE58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
