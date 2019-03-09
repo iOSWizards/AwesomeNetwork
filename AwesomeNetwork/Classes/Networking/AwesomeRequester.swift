@@ -17,59 +17,66 @@ public enum URLMethod: String {
 }
 
 public typealias AwesomeDataResponse = (Data?, AwesomeError?) -> Void
+public typealias AwesomeRetryDataResponse = (Data?, AwesomeError?, Int) -> Void
 public typealias AwesomeRequesterHeader = [String: String]
 
 public class AwesomeRequester: NSObject {
     
     var requestManager: AwesomeRequestManager = AwesomeRequestManager()
+    var useSemaphore: Bool = false
+    
+    init(useSemaphore: Bool) {
+        self.useSemaphore = useSemaphore
+    }
+    
+    /// Retry fetching data as long as it's not a successful response
+    ///
+    /// - Parameters:
+    ///   - request: Parameters for request
+    ///   - retry count: Choice to use or not semaphore
+    ///   - completion: Returns fetched NSData in a block
+    /// - Returns: URLSessionDataTask
+    func performRequestRetrying(_ request: AwesomeRequestProtocol,
+                                retryCount: Int,
+                                intermediate: AwesomeRetryDataResponse? = nil,
+                                completion:@escaping AwesomeDataResponse) {
+        performRequest(request) { (data, error) in
+            intermediate?(data, error, retryCount)
+            
+            if !request.isSuccessResponse(data), retryCount > 0 {
+                // adds a small timeout between calls
+                request.queue.asyncAfter(deadline: .now()+AwesomeNetwork.shared.retryTimeout, execute: {
+                    self.performRequestRetrying(request,
+                                                retryCount: retryCount-1,
+                                                intermediate: intermediate,
+                                                completion: completion)
+                })
+            } else {
+                completion(data, error)
+            }
+        }
+    }
     
     /// Fetch data from URL with NSUrlSession
     ///
     /// - Parameters:
     ///   - request: Parameters for request
-    ///   - useSemaphore: Choice to use or not semaphore
     ///   - completion: Returns fetched NSData in a block
     /// - Returns: URLSessionDataTask
-    func performRequest(_ request: AwesomeRequestParameters?,
-                        useSemaphore: Bool,
+    func performRequest(_ request: AwesomeRequestProtocol,
                         completion:@escaping AwesomeDataResponse) {
-        
-        guard let request = request else {
-            completion(nil, AwesomeError.invalidUrl)
+        guard let urlRequest = request.urlRequest else {
             return
         }
         
         if useSemaphore {
             AwesomeDispatcher.shared.executeBlock(queue: request.queue) { [weak self] in
-                self?.performRequestRetrying(request,
-                                             retryCount: request.retryCount,
-                                             completion: completion)
+                self?.performRequest(urlRequest, completion: completion)
             }
         } else {
-            performRequestRetrying(request,
-                                   retryCount: request.retryCount,
-                                   completion: completion)
+            performRequest(urlRequest, completion: completion)
         }
         
-    }
-    
-    func performRequestRetrying(_ request: AwesomeRequestParameters,
-                                retryCount: Int,
-                                completion:@escaping AwesomeDataResponse) {
-        
-        performRequest(request.urlRequest) { [weak self] (data, error) in
-                        
-                        if data == nil, retryCount > 0 {
-                            // adds a small timeout between calls
-                            request.queue.asyncAfter(deadline: .now()+AwesomeNetwork.shared.retryTimeout, execute: {
-                                self?.performRequestRetrying(request,
-                                                             retryCount: retryCount-1,
-                                                             completion: completion)
-                            })
-                        } else {
-                            completion(data, error)
-                        }
-        }
     }
     
     /// Fetch data from URL with NSUrlSession
@@ -78,8 +85,8 @@ public class AwesomeRequester: NSObject {
     ///   - urlRequest: Url Request to fetch data form
     ///   - completion: Returns fetched NSData in a block
     /// - Returns: URLSessionDataTask
-    func performRequest(_ urlRequest: URLRequest,
-                        completion:@escaping AwesomeDataResponse) {
+    internal func performRequest(_ urlRequest: URLRequest,
+                                 completion:@escaping AwesomeDataResponse) {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: urlRequest) { (data, response, error) in
             self.requestManager.removeRequest(to: urlRequest.url)

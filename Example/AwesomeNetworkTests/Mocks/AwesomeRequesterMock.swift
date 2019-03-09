@@ -15,6 +15,7 @@ class AwesomeRequesterMock: AwesomeRequester {
     var expectedError: AwesomeError?
     
     init(expectedData: Data?, expectedError: AwesomeError?) {
+        super.init(useSemaphore: false)
         self.expectedData = expectedData
         self.expectedError = expectedError
     }

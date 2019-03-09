@@ -130,7 +130,8 @@
 		90974308C6F9FB7CA1FFF07159AE196D /* SwiftVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38281C441AFD25543AC05E70EE8A9EB7 /* SwiftVersion.swift */; };
 		90CBB3ACF69420C3CBF17B02A21DEFF6 /* RLMSyncUser.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3322A66F38CEF56440AA481B0F42B5A1 /* RLMSyncUser.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"3.13.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		913D2BC161AC5E0FCD112CC0CF93EEA3 /* RLMObjectSchema.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = B8E4F2238DEC0348F492F5D3FA733102 /* RLMObjectSchema.h */; };
-		950B4446222FD58B004FFE58 /* AwesomeRequestParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950B4445222FD58B004FFE58 /* AwesomeRequestParameters.swift */; };
+		95341F1B223417D600CD385A /* AwesomeRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95341F1A223417D600CD385A /* AwesomeRequestProtocol.swift */; };
+		95341F212234183300CD385A /* AwesomeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95341F202234183300CD385A /* AwesomeParser.swift */; };
 		9573277C1C253542F94E847ECEB32BDD /* RLMCollection.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = 185E75EEF65D2A3E2860FE9EAF7C56A4 /* RLMCollection.h */; };
 		959CF54A84CE89D74B4D4C19B15002E4 /* sync_metadata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2499A3069EFDD7E12708ACFC60729599 /* sync_metadata.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"3.13.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		95FB5CD16B69E50287DBF1CB0C3CF020 /* RLMQueryUtil.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5958C5D99FD1C38CA84FA074B4AC9894 /* RLMQueryUtil.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"3.13.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
@@ -464,7 +465,8 @@
 		902719CCEAA831A50EC2150665742939 /* RealmCollection.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RealmCollection.swift; path = RealmSwift/RealmCollection.swift; sourceTree = "<group>"; };
 		9211F3FCD979295BABE6102D9202526E /* object_notifier.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = object_notifier.cpp; path = Realm/ObjectStore/src/impl/object_notifier.cpp; sourceTree = "<group>"; };
 		92388EA3C7130435596F90099067A9B4 /* RLMSchema_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMSchema_Private.h; path = include/RLMSchema_Private.h; sourceTree = "<group>"; };
-		950B4445222FD58B004FFE58 /* AwesomeRequestParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwesomeRequestParameters.swift; sourceTree = "<group>"; };
+		95341F1A223417D600CD385A /* AwesomeRequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeRequestProtocol.swift; sourceTree = "<group>"; };
+		95341F202234183300CD385A /* AwesomeParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AwesomeParser.swift; sourceTree = "<group>"; };
 		953C3FB5DE1F105098597CB2FDD1DA64 /* LinkingObjects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LinkingObjects.swift; path = RealmSwift/LinkingObjects.swift; sourceTree = "<group>"; };
 		98E4FD3760DDDA5436B0B3C72214EA92 /* RLMSchema.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMSchema.mm; path = Realm/RLMSchema.mm; sourceTree = "<group>"; };
 		98F2D3C7F243D2D79056A2412F6A854B /* object_store.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = object_store.cpp; path = Realm/ObjectStore/src/object_store.cpp; sourceTree = "<group>"; };
@@ -610,6 +612,7 @@
 				95F650E62231018100616FCC /* Uploading */,
 				539CD9413E62139B7FA9A4D9F242EB0C /* Extensions */,
 				6B08B39B926DFB70931886570B4A6FB9 /* Networking */,
+				95341F1F2234183300CD385A /* Parser */,
 				F2DF435D67BC4C72D2AAF0A53C839D25 /* Pod */,
 				57687692DED8804605E8409BD2CA1161 /* Support Files */,
 			);
@@ -729,7 +732,7 @@
 				CA8E5012B78B834DEDBF9F283639541A /* AwesomeReachability.swift */,
 				F6EF9D593B537129DEB7595775E79BD2 /* AwesomeRequester.swift */,
 				D09FE1A2E2966D5ED03FBEA1AC9B2871 /* AwesomeRequestManager.swift */,
-				950B4445222FD58B004FFE58 /* AwesomeRequestParameters.swift */,
+				95341F1A223417D600CD385A /* AwesomeRequestProtocol.swift */,
 			);
 			name = Networking;
 			path = AwesomeNetwork/Classes/Networking;
@@ -803,6 +806,15 @@
 				BE4371C50F2C6D581CC3E23B8C359195 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95341F1F2234183300CD385A /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				95341F202234183300CD385A /* AwesomeParser.swift */,
+			);
+			name = Parser;
+			path = AwesomeNetwork/Classes/Parser;
 			sourceTree = "<group>";
 		};
 		95F650E62231018100616FCC /* Uploading */ = {
@@ -1260,15 +1272,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				021A0526527EB23AD71A24D0AB2110EF /* AwesomeCacheManager.swift in Sources */,
-				950B4446222FD58B004FFE58 /* AwesomeRequestParameters.swift in Sources */,
 				23E30A02B2D8ECDBF1EDAD629CE4F88F /* AwesomeDispatcher.swift in Sources */,
 				EFE0B67911CFA95FC9D10D872EC7ECF3 /* AwesomeDownload.swift in Sources */,
 				8BA4C6B80443BEF8FC6E7C93DA5440D8 /* AwesomeDownloadManager.swift in Sources */,
 				D5F9C2E7CE86A6D1A791F93A1D4DF094 /* AwesomeError.swift in Sources */,
+				95341F212234183300CD385A /* AwesomeParser.swift in Sources */,
 				5D2013A7E2B5F74ADD42B678CBF1928D /* AwesomeNetwork+Reachability.swift in Sources */,
 				9D185874C5A46F11D47FC193CEB717C1 /* AwesomeNetwork-dummy.m in Sources */,
 				2CD310AB9E99A28CCEC6783821E3B8AF /* AwesomeNetwork.swift in Sources */,
 				CCA61811DF9D731F1DD57D6772D01D3E /* AwesomeReachability.swift in Sources */,
+				95341F1B223417D600CD385A /* AwesomeRequestProtocol.swift in Sources */,
 				B21631D4081CF4F638CEBE20C99381B4 /* AwesomeRealmCache.swift in Sources */,
 				DCBFEE13E36B0AB02F371A7405884005 /* AwesomeRequester.swift in Sources */,
 				F2FE3A5A8E993F41FCBB2C74ADAD7185 /* AwesomeRequestManager.swift in Sources */,

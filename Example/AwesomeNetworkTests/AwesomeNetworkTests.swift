@@ -22,7 +22,17 @@ class AwesomeNetworkTests: XCTestCase {
         let exp = expectation(description: "testRequestTimeout")
         exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: "https://google.com", cacheRule: .fromURL)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+            
+            var cacheRule: AwesomeCacheRule {
+                return  .fromURL
+            }
+        }
+        let request = RequestMock()
+        
         AwesomeNetwork.requestData(with: request) { (data, error) in
             exp.fulfill()
             XCTAssertEqual(error!, AwesomeError.timeOut(UUID().uuidString))
@@ -32,15 +42,27 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testResponseFromCacheAndUrl() {
-        let url: String = "https://google.com"
-        let method: URLMethod = .GET
         let data = UUID().uuidString.data(using: .utf8)
         
         let exp = expectation(description: "testResponseFromCacheAndUrl")
         exp.expectedFulfillmentCount = 2
         
-        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheAndUrl)
-        request?.saveToCache(data)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+            
+            var cacheRule: AwesomeCacheRule {
+                return  .fromCacheAndUrl
+            }
+            
+            var method: URLMethod {
+                return .GET
+            }
+        }
+        let request = RequestMock()
+        request.saveToCache(data)
+        
         AwesomeNetwork.requestData(with: request) { (responseData, error) in
             exp.fulfill()
         }
@@ -49,12 +71,24 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testResponseFromCacheOrUrlWithoutCache() {
-        let url: String = "https://google.com"
-        
         let exp = expectation(description: "testResponseFromCacheOrUrlWithoutCache")
         exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: url, cacheRule: .fromCacheOrUrl)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+            
+            var cacheRule: AwesomeCacheRule {
+                return  .fromCacheOrUrl
+            }
+            
+            var method: URLMethod {
+                return .GET
+            }
+        }
+        let request = RequestMock()
+        
         AwesomeNetwork.requestData(with: request) { (data, error) in
             exp.fulfill()
         }
@@ -63,15 +97,26 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testResponseFromCacheOrUrlWithCache() {
-        let url: String = "https://google.com"
-        let method: URLMethod = .GET
         let data = UUID().uuidString.data(using: .utf8)
         
         let exp = expectation(description: "testResponseFromCacheOrUrlWithCache")
         exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOrUrl)
-        request?.saveToCache(data)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+            
+            var cacheRule: AwesomeCacheRule {
+                return  .fromCacheOrUrl
+            }
+            
+            var method: URLMethod {
+                return .GET
+            }
+        }
+        let request = RequestMock()
+        request.saveToCache(data)
         
         AwesomeNetwork.requestData(with: request) { (responseData, error) in
             exp.fulfill()
@@ -81,12 +126,23 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testResponseFromCacheOnlyWithoutCache() {
-        let url: String = "https://google.com"
-        
         let exp = expectation(description: "testResponseFromCacheOnlyWithoutCache")
         exp.isInverted = true
         
-        let request = AwesomeRequestParameters(urlString: url, cacheRule: .fromCacheOnly)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+            
+            var cacheRule: AwesomeCacheRule {
+                return  .fromCacheOnly
+            }
+            
+            var method: URLMethod {
+                return .GET
+            }
+        }
+        let request = RequestMock()
         
         AwesomeNetwork.requestData(with: request) { (responseData, error) in
             XCTAssertNil(responseData)
@@ -97,15 +153,26 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testResponseFromCacheOnlyWithCache() {
-        let url: String = "https://google.com"
-        let method: URLMethod = .GET
         let data = UUID().uuidString.data(using: .utf8)
         
         let exp = expectation(description: "testResponseFromCacheOrUrlWithCache")
         exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOnly)
-        request?.saveToCache(data)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+            
+            var cacheRule: AwesomeCacheRule {
+                return  .fromCacheOnly
+            }
+            
+            var method: URLMethod {
+                return .GET
+            }
+        }
+        let request = RequestMock()
+        request.saveToCache(data)
         
         AwesomeNetwork.requestData(with: request) { (responseData, error) in
             exp.fulfill()
@@ -116,8 +183,6 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testRequestGeneric() {
-        let url: String = "https://google.com"
-        let method: URLMethod = .GET
         let mockObject = CodableObjectMock(name: UUID().uuidString)
         let data = try! mockObject.encode()
         
@@ -126,8 +191,13 @@ class AwesomeNetworkTests: XCTestCase {
         
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: data, expectedError: nil)
         
-        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOnly)
-        request?.saveToCache(data)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+        }
+        let request = RequestMock()
+        request.saveToCache(data)
         
         AwesomeNetwork.requestGeneric(with: request) { (object: CodableObjectMock?, error) in
             exp.fulfill()
@@ -138,8 +208,6 @@ class AwesomeNetworkTests: XCTestCase {
     }
     
     func testRequestGenericArray() {
-        let url: String = "https://google.com"
-        let method: URLMethod = .GET
         let mockObjects = [CodableObjectMock(name: UUID().uuidString),
                            CodableObjectMock(name: UUID().uuidString),
                            CodableObjectMock(name: UUID().uuidString)]
@@ -150,10 +218,15 @@ class AwesomeNetworkTests: XCTestCase {
         
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: data, expectedError: nil)
         
-        let request = AwesomeRequestParameters(urlString: url, method: method, cacheRule: .fromCacheOnly)
-        request?.saveToCache(data)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+        }
+        let request = RequestMock()
+        request.saveToCache(data)
         
-        AwesomeNetwork.requestGenericArray(with: request) { (objects: [CodableObjectMock], error) in
+        AwesomeNetwork.requestGeneric(with: request) { (objects: [CodableObjectMock], error) in
             exp.fulfill()
             XCTAssertEqual(objects.count, mockObjects.count)
             XCTAssertEqual(objects.first?.name, mockObjects.first?.name)
@@ -161,4 +234,5 @@ class AwesomeNetworkTests: XCTestCase {
         
         wait(for: [exp], timeout: 1)
     }
+    
 }

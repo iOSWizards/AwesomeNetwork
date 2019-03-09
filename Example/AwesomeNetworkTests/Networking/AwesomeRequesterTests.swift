@@ -26,22 +26,21 @@ class AwesomeRequesterTests: XCTestCase {
         XCTAssertEqual(AwesomeError.timeOut(UUID().uuidString), AwesomeError.timeOut(UUID().uuidString))
         XCTAssertNotEqual(AwesomeError.timeOut(UUID().uuidString), AwesomeError.cacheRule(UUID().uuidString))
     }
-
+    
     func testPerformRequestUrlError() {
         let exp = expectation(description: "testPerformRequestUrlError")
-        exp.expectedFulfillmentCount = 2
+        exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: nil)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return ""
+            }
+        }
+        let request = RequestMock()
+        
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: nil, expectedError: AwesomeError.invalidUrl)
         
-        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: false) { (data, error) in
-            exp.fulfill()
-            XCTAssertNil(data)
-            XCTAssertEqual(error!, AwesomeError.invalidUrl)
-        }
-        
-        let request2 = AwesomeRequestParameters(urlString: nil)
-        AwesomeNetwork.shared.requester?.performRequest(request2, useSemaphore: false) { (data, error) in
+        AwesomeNetwork.shared.requester?.performRequest(request) { (data, error) in
             exp.fulfill()
             XCTAssertNil(data)
             XCTAssertEqual(error!, AwesomeError.invalidUrl)
@@ -54,10 +53,17 @@ class AwesomeRequesterTests: XCTestCase {
         let exp = expectation(description: "testSemaphoreGivenGreenLights")
         exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: "https://www.google.com")
-        AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: UUID().uuidString.data(using: .utf8), expectedError: nil)
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+        }
+        let request = RequestMock()
         
-        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: true) { (data, error) in
+        AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: UUID().uuidString.data(using: .utf8), expectedError: nil)
+        AwesomeNetwork.shared.requester?.useSemaphore = true
+        
+        AwesomeNetwork.shared.requester?.performRequest(request) { (data, error) in
             exp.fulfill()
         }
         
@@ -70,11 +76,17 @@ class AwesomeRequesterTests: XCTestCase {
         let exp = expectation(description: "testRequestQueue")
         exp.expectedFulfillmentCount = 1
         
-        let request = AwesomeRequestParameters(urlString: "https://www.google.com")
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://www.Awesome.com"
+            }
+        }
+        let request = RequestMock()
+        
         AwesomeNetwork.shared.requester = AwesomeRequesterMock(expectedData: UUID().uuidString.data(using: .utf8), expectedError: nil)
         
         XCTAssertEqual(AwesomeNetwork.shared.requester?.requestManager.requestQueue.count, 0)
-        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: false) { (data, error) in
+        AwesomeNetwork.shared.requester?.performRequest(request) { (data, error) in
             exp.fulfill()
             XCTAssertEqual(AwesomeNetwork.shared.requester?.requestManager.requestQueue.count, 0)
         }
@@ -84,16 +96,35 @@ class AwesomeRequesterTests: XCTestCase {
         
         wait(for: [exp], timeout: 1)
     }
- 
+    
     func testRetry() {
         let exp = expectation(description: "testRetry")
-        exp.expectedFulfillmentCount = 1
+        exp.expectedFulfillmentCount = 4
         
-        let request = AwesomeRequestParameters(urlString: "https://", retryCount: 2)
-        AwesomeNetwork.shared.requester?.performRequest(request, useSemaphore: false) { (data, error) in
-            exp.fulfill()
+        class RequestMock: AwesomeRequestProtocol {
+            var urlString: String {
+                return "https://"
+            }
+            
+            var retryCount: Int {
+                return 2
+            }
+            
+            func isSuccessResponse(_ response: Data?) -> Bool {
+                return false
+            }
         }
+        let request = RequestMock()
+        let requester = AwesomeRequesterMock(expectedData: UUID().uuidString.data(using: .utf8), expectedError: nil)
         
-        wait(for: [exp], timeout: 5)
+        requester.performRequestRetrying(request,
+                                         retryCount: request.retryCount,
+                                         intermediate: { (data, error, count) in
+                                            exp.fulfill()
+        }, completion: { (data, error) in
+            exp.fulfill()
+        })
+        
+        wait(for: [exp], timeout: 10)
     }
 }
