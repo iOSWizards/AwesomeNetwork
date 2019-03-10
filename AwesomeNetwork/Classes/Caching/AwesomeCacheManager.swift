@@ -6,7 +6,7 @@
 //  Copyright © 2016 Awesome. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public enum AwesomeCacheType {
     case urlCache
