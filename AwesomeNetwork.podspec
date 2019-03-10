@@ -29,15 +29,11 @@ Network handling.
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '10.0'
-  s.osx.deployment_target = '10.10'
-  s.watchos.deployment_target = '4.0'
   s.tvos.deployment_target = '10.0'
   
   # Platforms
   s.platforms = {
       :ios => '10.0',
-      :osx => '10.10',
-      :watchos => '4.0',
       :tvos => '10.0'
   }
 
