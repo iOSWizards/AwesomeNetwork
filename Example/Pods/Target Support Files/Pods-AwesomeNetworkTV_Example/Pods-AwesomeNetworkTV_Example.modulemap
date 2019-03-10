@@ -1,0 +1,6 @@
+framework module Pods_AwesomeNetworkTV_Example {
+  umbrella header "Pods-AwesomeNetworkTV_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

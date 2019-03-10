@@ -1,10 +1,19 @@
 use_frameworks!
 
-target 'AwesomeNetwork_Example' do
+def available_pods
   pod 'AwesomeNetwork', :path => '../'
+end
+
+target 'AwesomeNetwork_Example' do
+  available_pods
 
   target 'AwesomeNetworkTests' do
     inherit! :search_paths
     
   end
+end
+
+target 'AwesomeNetworkTV_Example' do
+  available_pods
+  
 end

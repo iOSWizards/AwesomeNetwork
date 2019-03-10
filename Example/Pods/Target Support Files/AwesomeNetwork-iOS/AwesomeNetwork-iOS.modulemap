@@ -1,0 +1,6 @@
+framework module AwesomeNetwork {
+  umbrella header "AwesomeNetwork-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
