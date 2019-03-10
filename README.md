@@ -10,6 +10,7 @@ To run the example project:
 ## Requirements
 
 - iOS 10 or Higher
+- tvOS 10 or Higher
 - Swift 4.2
 
 ### Dependencies
@@ -24,7 +25,7 @@ AwesomeCore is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AwesomeNetwork', git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.2.0'
+pod 'AwesomeNetwork', git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.2.1'
 ```
 
 ### For Objective-C Project
