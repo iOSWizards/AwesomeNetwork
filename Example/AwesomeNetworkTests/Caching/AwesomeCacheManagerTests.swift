@@ -48,54 +48,57 @@ class AwesomeCacheManagerTests: XCTestCase {
     }
     
     func testSaveCache() {
-        let url: String = UUID().uuidString
+        let url: URL = URL(string: "https://google.com")!
         let method: URLMethod = .GET
         let body: Data? = nil
         let data: Data? = UUID().uuidString.data(using: .utf8)
+        let urlRequest = URLRequest.request(with: url, method: method, bodyData: body)
         
-        let dataFromCache1 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: body)
+        let dataFromCache1 = cacheManager.verifyForCache(with: urlRequest)
         XCTAssertNil(dataFromCache1)
         
-        cacheManager.saveCache(withUrl: url, method: method.rawValue, body: body, data: data)
+        cacheManager.saveCache(data, with: urlRequest)
         
-        let dataFromCache2 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: body)
+        let dataFromCache2 = cacheManager.verifyForCache(with: urlRequest)
         XCTAssertNotNil(dataFromCache2)
         XCTAssertEqual(dataFromCache2, data)
         
     }
 
     func testSaveCacheWithParams() {
-        let url: String = UUID().uuidString
+        let url: URL = URL(string: "https://google.com")!
         let method: URLMethod = .GET
         let body: Data? = UUID().uuidString.data(using: .utf8)
         let data: Data? = UUID().uuidString.data(using: .utf8)
+        let urlRequest = URLRequest.request(with: url, method: method, bodyData: body)
         
-        let dataFromCache1 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: body)
+        let dataFromCache1 = cacheManager.verifyForCache(with: urlRequest)
         XCTAssertNil(dataFromCache1)
         
-        cacheManager.saveCache(withUrl: url, method: method.rawValue, body: body, data: data)
+        cacheManager.saveCache(data, with: urlRequest)
         
-        let dataFromCache2 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: body)
+        let dataFromCache2 = cacheManager.verifyForCache(with: URLRequest.request(with: url, method: method, bodyData: body))
         XCTAssertNotNil(dataFromCache2)
         XCTAssertEqual(dataFromCache2, data)
         
-        let dataFromCache3 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: nil)
+        let dataFromCache3 = cacheManager.verifyForCache(with: URLRequest.request(with: url, method: method))
         XCTAssertNil(dataFromCache3)
         
-        let dataFromCache4 = cacheManager.verifyForCache(withUrl: url, method: URLMethod.POST.rawValue, body: body)
+        let dataFromCache4 = cacheManager.verifyForCache(with: URLRequest.request(with: url, method: .POST, bodyData: body))
         XCTAssertNil(dataFromCache4)
         
-        let dataFromCache5 = cacheManager.verifyForCache(withUrl: UUID().uuidString, method: method.rawValue, body: body)
+        let dataFromCache5 = cacheManager.verifyForCache(with: URLRequest.request(with: URL(string: "https://google.com/test")!, method: method, bodyData: body))
         XCTAssertNil(dataFromCache5)
         
         // save a second url to compare with first
-        let url2: String = UUID().uuidString
+        let url2: URL = URL(string: "https://google.com/2")!
         let method2: URLMethod = .GET
         let body2: Data? = UUID().uuidString.data(using: .utf8)
         let data2: Data? = UUID().uuidString.data(using: .utf8)
-        cacheManager.saveCache(withUrl: url2, method: method2.rawValue, body: body2, data: data2)
+        let urlRequest2 = URLRequest.request(with: url2, method: method2, bodyData: body2)
+        cacheManager.saveCache(data2, with: urlRequest2)
         
-        let dataFromCache6 = cacheManager.verifyForCache(withUrl: url2, method: method2.rawValue, body: body2)
+        let dataFromCache6 = cacheManager.verifyForCache(with: urlRequest2)
         XCTAssertNotNil(dataFromCache6)
         XCTAssertEqual(dataFromCache6, data2)
         XCTAssertNotEqual(String(data: dataFromCache2!, encoding: .utf8),
@@ -103,35 +106,22 @@ class AwesomeCacheManagerTests: XCTestCase {
     }
     
     func testClearCache() {
-        let url: String = UUID().uuidString
+        let url: URL = URL(string: "https://google.com")!
         let method: URLMethod = .GET
         let body: Data? = nil
         let data: Data? = UUID().uuidString.data(using: .utf8)
+        let urlRequest = URLRequest.request(with: url, method: method, bodyData: body)
         
-        cacheManager.saveCache(withUrl: url, method: method.rawValue, body: body, data: data)
+        cacheManager.saveCache(data, with: urlRequest)
         
-        let dataFromCache1 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: body)
+        let dataFromCache1 = cacheManager.verifyForCache(with: urlRequest)
         XCTAssertNotNil(dataFromCache1)
         XCTAssertEqual(dataFromCache1, data)
         
         cacheManager.clearCache()
         
-        let dataFromCache2 = cacheManager.verifyForCache(withUrl: url, method: method.rawValue, body: body)
+        let dataFromCache2 = cacheManager.verifyForCache(with: urlRequest)
         XCTAssertNil(dataFromCache2)
-    }
-
-    func testURLCacheKey() {
-        let url: String = UUID().uuidString
-        let method: URLMethod = .GET
-        
-        let hashKey = url + "?keyHash=\(url + method.rawValue)"
-        let key = AwesomeCacheManager.buildURLCacheKey(url, method: method.rawValue, bodyData: nil)
-        XCTAssertEqual(key, hashKey)
-        
-        let body: Data? = UUID().uuidString.data(using: .utf8)
-        let hashKeyWithBody = url + "?keyHash=\(String(data: body!, encoding: .utf8)! + url + method.rawValue)"
-        let keyWithBody = AwesomeCacheManager.buildURLCacheKey(url, method: method.rawValue, bodyData: body)
-        XCTAssertEqual(keyWithBody, hashKeyWithBody)
     }
     
 }

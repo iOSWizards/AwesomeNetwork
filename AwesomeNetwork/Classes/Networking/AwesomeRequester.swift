@@ -89,7 +89,7 @@ public class AwesomeRequester: NSObject {
                                  completion:@escaping AwesomeDataResponse) {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: urlRequest) { (data, response, error) in
-            self.requestManager.removeRequest(to: urlRequest.url)
+            self.requestManager.removeRequest(to: urlRequest)
             
             if let error = error {
                 print("There was an error \(error.localizedDescription)")
@@ -112,7 +112,7 @@ public class AwesomeRequester: NSObject {
                 }
             }
         }
-        requestManager.addRequest(to: urlRequest.url, task: dataTask)
+        requestManager.addRequest(to: urlRequest, task: dataTask)
         dataTask.resume()
     }
 }

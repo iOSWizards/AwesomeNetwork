@@ -31,11 +31,11 @@ class AwesomeRequestManagerTests: XCTestCase {
             // canceled
         }
         
-        requestManager.addRequest(to: mock.url, task: mock.mockTask!)
+        requestManager.addRequest(to: mock.urlRequest, task: mock.mockTask!)
         
         XCTAssertEqual(requestManager.requestQueue.count, 1)
         
-        requestManager.removeRequest(to: mock.url)
+        requestManager.removeRequest(to: mock.urlRequest)
         
         XCTAssertEqual(requestManager.requestQueue.count, 0)
     }
@@ -54,11 +54,11 @@ class AwesomeRequestManagerTests: XCTestCase {
             exp.fulfill()
         }
         
-        requestManager.addRequest(to: mock.url, task: mock.mockTask!)
+        requestManager.addRequest(to: mock.urlRequest, task: mock.mockTask!)
         
         XCTAssertEqual(requestManager.requestQueue.count, 1)
         
-        requestManager.cancelRequest(to: mock.url)
+        requestManager.cancelRequest(to: mock.urlRequest)
         
         XCTAssertEqual(requestManager.requestQueue.count, 0)
         
@@ -78,7 +78,7 @@ class AwesomeRequestManagerTests: XCTestCase {
             // canceled
             exp.fulfill()
         }
-        requestManager.addRequest(to: mock.url, task: mock.mockTask!)
+        requestManager.addRequest(to: mock.urlRequest, task: mock.mockTask!)
         
         XCTAssertEqual(requestManager.requestQueue.count, 1)
         
@@ -89,7 +89,7 @@ class AwesomeRequestManagerTests: XCTestCase {
             // canceled
             exp.fulfill()
         }
-        requestManager.addRequest(to: mock2.url, task: mock2.mockTask!)
+        requestManager.addRequest(to: mock2.urlRequest, task: mock2.mockTask!)
         
         XCTAssertEqual(requestManager.requestQueue.count, 2)
         
@@ -103,18 +103,15 @@ class AwesomeRequestManagerTests: XCTestCase {
 
 fileprivate class AwesomeRequestManagerTestsMock {
     
-    var url: URL!
+    var urlRequest: URLRequest!
     var mockTask: URLSessionDataTask?
     
     init(url: String) {
-        self.url = URL(string: url)!
+        urlRequest = URLRequest.request(with: url.url()!, method: .GET)
     }
     
     func performMockRequest(completion: @escaping () -> Void, canceled: @escaping () -> Void) {
         
-        let urlRequest = NSMutableURLRequest(url: url)
-        urlRequest.httpMethod = "GET"
-
         let session = URLSession.shared
         mockTask = session.dataTask(with: urlRequest as URLRequest) { (data, response, error) in
             

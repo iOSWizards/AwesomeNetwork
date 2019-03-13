@@ -11,26 +11,18 @@ class AwesomeRequestManager {
     
     var requestQueue: [String: URLSessionTask] = [:]
     
-    func addRequest(to url: URL?, task: URLSessionTask) {
-        guard let url = url else {
-            return
-        }
-        
-        requestQueue[url.path]?.cancel()
-        requestQueue[url.path] = task
+    func addRequest(to urlRequest: URLRequest, task: URLSessionTask) {
+        requestQueue[urlRequest.urlCacheKey]?.cancel()
+        requestQueue[urlRequest.urlCacheKey] = task
     }
     
-    func removeRequest(to url: URL?) {
-        guard let url = url else {
-            return
-        }
-        
-        requestQueue[url.path] = nil
+    func removeRequest(to urlRequest: URLRequest) {
+        requestQueue[urlRequest.urlCacheKey] = nil
     }
     
-    func cancelRequest(to url: URL) {
-        requestQueue[url.path]?.cancel()
-        removeRequest(to: url)
+    func cancelRequest(to urlRequest: URLRequest) {
+        requestQueue[urlRequest.urlCacheKey]?.cancel()
+        removeRequest(to: urlRequest)
     }
     
     func cancelAllRequests() {

@@ -37,4 +37,22 @@ extension URLRequest {
         return urlRequest as URLRequest
     }
     
+    public var urlCacheKey: String {
+        guard let url = url else {
+            return ""
+        }
+        
+        var hashValue = "?keyHash="
+        
+        if let httpMethod = httpMethod {
+            hashValue.append(httpMethod)
+        }
+        
+        if let httpBody = httpBody,
+            let bodyString = String(data: httpBody, encoding: .utf8){
+            hashValue.append(bodyString)
+        }
+        
+        return url.path.appending(hashValue)
+    }
 }

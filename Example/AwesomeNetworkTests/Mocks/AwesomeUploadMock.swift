@@ -26,10 +26,12 @@ class AwesomeUploadMock: AwesomeUpload {
             return
         }
         
-        requestManager.addRequest(to: url, task: URLSessionDataTask())
+        let urlRequest = URLRequest.request(with: url)
+        
+        requestManager.addRequest(to: urlRequest, task: URLSessionDataTask())
         
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
-            self.requestManager.removeRequest(to: url)
+            self.requestManager.removeRequest(to: urlRequest)
             
             completion(self.expectedData, self.expectedError)
         }

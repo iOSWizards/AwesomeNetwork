@@ -70,24 +70,19 @@ extension AwesomeRequestProtocol {
     }
     
     public var cachedData: Data? {
-        guard let url = urlRequest?.url?.absoluteString else {
+        guard let urlRequest = urlRequest else {
             return nil
         }
         
-        return AwesomeNetwork.shared.cacheManager?.verifyForCache(withUrl: url,
-                                                                method: urlRequest?.httpMethod,
-                                                                body: urlRequest?.httpBody)
+        return AwesomeNetwork.shared.cacheManager?.verifyForCache(with: urlRequest)
     }
     
     public func saveToCache(_ data: Data?) {
-        guard let url = urlRequest?.url?.absoluteString else {
+        guard let urlRequest = urlRequest else {
             return
         }
         
-        AwesomeNetwork.shared.cacheManager?.saveCache(withUrl: url,
-                                                    method: urlRequest?.httpMethod,
-                                                    body: urlRequest?.httpBody,
-                                                    data: data)
+        AwesomeNetwork.shared.cacheManager?.saveCache(data, with: urlRequest)
     }
     
     /*public func isSuccessResponse<T: Decodable>(_ response: T?) -> Bool {

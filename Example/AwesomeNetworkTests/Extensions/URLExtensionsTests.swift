@@ -102,6 +102,20 @@ class URLExtensionsTests: XCTestCase {
         
         wait(for: [exp], timeout: 1)
     }
+    
+    func testURLCacheKey() {
+        let url: URL = URL(string: "https://google.com")!
+        let method: URLMethod = .GET
+        
+        let hashKey = url.path.appending("?keyHash=\(method.rawValue)")
+        let key = URLRequest.request(with: url, method: method).urlCacheKey
+        XCTAssertEqual(key, hashKey)
+        
+        let body: Data! = UUID().uuidString.data(using: .utf8)
+        let hashKeyWithBody = url.path.appending("?keyHash=\(method.rawValue)\(String(data: body, encoding: .utf8)!)")
+        let keyWithBody = URLRequest.request(with: url, method: method, bodyData: body).urlCacheKey
+        XCTAssertEqual(keyWithBody, hashKeyWithBody)
+    }
 }
 
 fileprivate struct URLExtensionsTestsMock {
@@ -127,5 +141,4 @@ fileprivate struct URLExtensionsTestsMock {
         var isDir : ObjCBool = false
         return FileManager().fileExists(atPath: url.path, isDirectory: &isDir)
     }
-    
 }

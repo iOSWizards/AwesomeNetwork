@@ -34,7 +34,7 @@ public class AwesomeUpload: NSObject {
                                             headers: headers)
         
         let task = URLSession.shared.uploadTask(with: urlRequest, from: uploadData) { [weak self] data, response, error in
-            self?.requestManager.removeRequest(to: url)
+            self?.requestManager.removeRequest(to: urlRequest)
             
             if let error = error {
                 completion(nil, AwesomeError.uploadFailed(error.localizedDescription))
@@ -51,7 +51,7 @@ public class AwesomeUpload: NSObject {
                 completion(data, nil)
             }
         }
-        requestManager.addRequest(to: url, task: task)
+        requestManager.addRequest(to: urlRequest, task: task)
         task.resume()
     }
     
