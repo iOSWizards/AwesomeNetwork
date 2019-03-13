@@ -20,8 +20,8 @@ class AwesomeRequesterMock: AwesomeRequester {
         self.expectedError = expectedError
     }
     
-    override func performRequest(_ urlRequest: URLRequest, completion: @escaping AwesomeDataResponse) {
-        AwesomeNetwork.shared.requester?.requestManager.addRequest(to: urlRequest, task: URLSessionDataTask())
+    override func performRequest(_ urlRequest: URLRequest, cancelPrevious: Bool = false, completion: @escaping AwesomeDataResponse) {
+        AwesomeNetwork.shared.requester?.requestManager.addRequest(to: urlRequest, task: URLSessionDataTask(), cancelPrevious:  cancelPrevious)
         
         DispatchQueue.main.asyncAfter(deadline: .now()+1) {
             AwesomeNetwork.shared.requester?.requestManager.removeRequest(to: urlRequest)

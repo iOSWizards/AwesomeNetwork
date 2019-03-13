@@ -18,6 +18,7 @@ public protocol AwesomeRequestProtocol {
     var cacheRule: AwesomeCacheRule { get }
     var queue: DispatchQueue { get }
     var retryCount: Int { get }
+    var cancelPreviousRequest: Bool { get }
     
     //func isSuccessResponse<T: Decodable>(_ response: T?) -> Bool
     func isSuccessResponse(_ response: Data?) -> Bool
@@ -67,6 +68,10 @@ extension AwesomeRequestProtocol {
     
     public var retryCount: Int {
         return 0
+    }
+    
+    public var cancelPreviousRequest: Bool {
+        return false
     }
     
     public var cachedData: Data? {

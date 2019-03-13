@@ -71,10 +71,10 @@ public class AwesomeRequester: NSObject {
         
         if useSemaphore {
             AwesomeDispatcher.shared.executeBlock(queue: request.queue) { [weak self] in
-                self?.performRequest(urlRequest, completion: completion)
+                self?.performRequest(urlRequest, cancelPrevious: request.cancelPreviousRequest, completion: completion)
             }
         } else {
-            performRequest(urlRequest, completion: completion)
+            performRequest(urlRequest, cancelPrevious: request.cancelPreviousRequest, completion: completion)
         }
         
     }
@@ -86,6 +86,7 @@ public class AwesomeRequester: NSObject {
     ///   - completion: Returns fetched NSData in a block
     /// - Returns: URLSessionDataTask
     internal func performRequest(_ urlRequest: URLRequest,
+                                 cancelPrevious: Bool = false,
                                  completion:@escaping AwesomeDataResponse) {
         let session = URLSession.shared
         let dataTask = session.dataTask(with: urlRequest) { (data, response, error) in
@@ -112,7 +113,7 @@ public class AwesomeRequester: NSObject {
                 }
             }
         }
-        requestManager.addRequest(to: urlRequest, task: dataTask)
+        requestManager.addRequest(to: urlRequest, task: dataTask, cancelPrevious: cancelPrevious)
         dataTask.resume()
     }
 }
