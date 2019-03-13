@@ -16,12 +16,13 @@ public enum AwesomeCacheType {
 public enum AwesomeCacheRule {
     case fromCacheOnly
     case fromCacheOrUrl
+    case fromCacheOrUrlThenUpdate // returns cache or URL data, then fetchs data from URL but doesn't return
     case fromCacheAndUrl
     case fromURL
     
     public var shouldGetFromCache: Bool {
         switch self {
-        case .fromCacheOnly, .fromCacheOrUrl, .fromCacheAndUrl:
+        case .fromCacheOnly, .fromCacheOrUrl, .fromCacheAndUrl, .fromCacheOrUrlThenUpdate:
             return true
         default:
             return false
@@ -32,10 +33,21 @@ public enum AwesomeCacheRule {
         switch self {
         case .fromCacheOrUrl:
             return !didReturnCache
-        case .fromURL, .fromCacheAndUrl:
+        case .fromURL, .fromCacheAndUrl, .fromCacheOrUrlThenUpdate:
             return true
         default:
             return false
+        }
+    }
+    
+    public func shouldReturnUrlData(didReturnCache: Bool) -> Bool {
+        switch self {
+        case .fromCacheOrUrlThenUpdate, .fromCacheOnly:
+            return false
+        case .fromCacheAndUrl, .fromURL:
+            return true
+        default:
+            return !didReturnCache
         }
     }
 }

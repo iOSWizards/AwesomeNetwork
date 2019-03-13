@@ -25,18 +25,26 @@ class AwesomeCacheManagerTests: XCTestCase {
         XCTAssertTrue(AwesomeCacheRule.fromCacheAndUrl.shouldGetFromCache)
         XCTAssertTrue(AwesomeCacheRule.fromCacheAndUrl.shouldGetFromUrl(didReturnCache: false))
         XCTAssertTrue(AwesomeCacheRule.fromCacheAndUrl.shouldGetFromUrl(didReturnCache: true))
+        XCTAssertTrue(AwesomeCacheRule.fromCacheAndUrl.shouldReturnUrlData(didReturnCache: false))
+        XCTAssertTrue(AwesomeCacheRule.fromCacheAndUrl.shouldReturnUrlData(didReturnCache: true))
         
         XCTAssertTrue(AwesomeCacheRule.fromCacheOrUrl.shouldGetFromCache)
         XCTAssertTrue(AwesomeCacheRule.fromCacheOrUrl.shouldGetFromUrl(didReturnCache: false))
         XCTAssertFalse(AwesomeCacheRule.fromCacheOrUrl.shouldGetFromUrl(didReturnCache: true))
+        XCTAssertTrue(AwesomeCacheRule.fromCacheOrUrl.shouldReturnUrlData(didReturnCache: false))
+        XCTAssertFalse(AwesomeCacheRule.fromCacheOrUrl.shouldReturnUrlData(didReturnCache: true))
         
         XCTAssertTrue(AwesomeCacheRule.fromCacheOnly.shouldGetFromCache)
         XCTAssertFalse(AwesomeCacheRule.fromCacheOnly.shouldGetFromUrl(didReturnCache: false))
         XCTAssertFalse(AwesomeCacheRule.fromCacheOnly.shouldGetFromUrl(didReturnCache: true))
+        XCTAssertFalse(AwesomeCacheRule.fromCacheOnly.shouldReturnUrlData(didReturnCache: false))
+        XCTAssertFalse(AwesomeCacheRule.fromCacheOnly.shouldReturnUrlData(didReturnCache: true))
         
         XCTAssertFalse(AwesomeCacheRule.fromURL.shouldGetFromCache)
         XCTAssertTrue(AwesomeCacheRule.fromURL.shouldGetFromUrl(didReturnCache: false))
         XCTAssertTrue(AwesomeCacheRule.fromURL.shouldGetFromUrl(didReturnCache: true))
+        XCTAssertTrue(AwesomeCacheRule.fromURL.shouldReturnUrlData(didReturnCache: false))
+        XCTAssertTrue(AwesomeCacheRule.fromURL.shouldReturnUrlData(didReturnCache: true))
     }
     
     func testSaveCache() {

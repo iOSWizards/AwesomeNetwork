@@ -52,10 +52,13 @@ public class AwesomeNetwork {
     ///   - completion: Data or Error
     public static func requestData(with request: AwesomeRequestProtocol,
                                    completion:@escaping AwesomeDataResponse) {
-        dataFromCache(with: request, completion: completion, fetchFromUrl: {
+        dataFromCache(with: request, completion: completion, fetchFromUrl: { didReturnCache in
             shared.requester?.performRequestRetrying(request, retryCount: request.retryCount) { (data, error) in
                 request.saveToCache(data)
-                completion(data, error)
+                
+                if request.cacheRule.shouldReturnUrlData(didReturnCache: didReturnCache) {
+                    completion(data, error)
+                }
             }
         })
     }
@@ -122,12 +125,13 @@ public class AwesomeNetwork {
     ///   - fetchFromUrl: Called if should get from URL
     static func dataFromCache(with request: AwesomeRequestProtocol,
                               completion:@escaping AwesomeDataResponse,
-                              fetchFromUrl:@escaping () -> Void) {
+                              fetchFromUrl:@escaping (_ returnedCache: Bool) -> Void) {
         var didReturnCache: Bool = false
         
         // gets from cache if any
         if request.cacheRule.shouldGetFromCache,
-            let data = request.cachedData {
+            let data = request.cachedData,
+            request.isSuccessResponse(data) {
             completion(data, nil)
             didReturnCache = true
         }
@@ -140,7 +144,7 @@ public class AwesomeNetwork {
             return
         }
         
-        fetchFromUrl()
+        fetchFromUrl(didReturnCache)
     }
     
 }
