@@ -42,7 +42,7 @@ public enum AwesomeCacheRule {
     
     public func shouldReturnUrlData(didReturnCache: Bool) -> Bool {
         switch self {
-        case .fromCacheOrUrlThenUpdate, .fromCacheOnly:
+        case .fromCacheOnly:
             return false
         case .fromCacheAndUrl, .fromURL:
             return true
