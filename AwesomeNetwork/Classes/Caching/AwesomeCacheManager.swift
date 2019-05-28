@@ -67,11 +67,11 @@ public class AwesomeCacheManager: NSObject {
         AwesomeRealmCache.clearDatabase()
     }
     
-    func cache(_ data: Data, forKey key: String) {
+    public func cache(_ data: Data, forKey key: String) {
         AwesomeRealmCache(key: key, value: data).save()
     }
     
-    func data(forKey key: String) -> Data? {
+    public func data(forKey key: String) -> Data? {
         return AwesomeRealmCache.data(forKey: key)
     }
     

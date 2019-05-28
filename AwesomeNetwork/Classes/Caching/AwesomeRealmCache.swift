@@ -34,9 +34,9 @@ public class AwesomeRealmCache: Object {
     }
     
     static func clearDatabase() {
-        let realm = try! Realm()
-        try! realm.write {
-            realm.deleteAll()
+        let realm = try? Realm()
+        try? realm?.write {
+            realm?.deleteAll()
         }
     }
     

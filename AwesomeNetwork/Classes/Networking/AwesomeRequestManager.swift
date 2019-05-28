@@ -9,11 +9,11 @@ import Foundation
 
 class AwesomeRequestManager {
     
-    var requestQueue: [String: URLSessionTask] = [:]
+    var requestQueue: [String: URLSessionTask?] = [:]
     
     func addRequest(to urlRequest: URLRequest, task: URLSessionTask, cancelPrevious: Bool = false) {
         if cancelPrevious {
-            requestQueue[urlRequest.urlCacheKey]?.cancel()
+            requestQueue[urlRequest.urlCacheKey]??.cancel()
         }
         requestQueue[urlRequest.urlCacheKey] = task
     }
@@ -23,13 +23,13 @@ class AwesomeRequestManager {
     }
     
     func cancelRequest(to urlRequest: URLRequest) {
-        requestQueue[urlRequest.urlCacheKey]?.cancel()
+        requestQueue[urlRequest.urlCacheKey]??.cancel()
         removeRequest(to: urlRequest)
     }
     
     func cancelAllRequests() {
         for request in requestQueue.values {
-            request.cancel()
+            request?.cancel()
         }
         
         requestQueue.removeAll()
