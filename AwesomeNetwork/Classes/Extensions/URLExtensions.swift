@@ -16,7 +16,7 @@ extension URL {
         return URL.documentsDirectory.appendingPathComponent(folder)
     }
     
-    public func offlineFileDestination(withFolder folder: String? = nil) -> URL {
+    public func offlineFileDestination(withFolder folder: String? = AwesomeDownload.shared.defaultDownloadFolder) -> URL {
         if let folder = folder {
             return URL.destination(for: folder).appendingPathComponent(lastPathComponent)
         }
@@ -35,18 +35,18 @@ extension URL {
         }
     }
     
-    public func offlineFileExists(withFolder folder: String? = nil) -> Bool {
+    public func offlineFileExists(withFolder folder: String? = AwesomeDownload.shared.defaultDownloadFolder) -> Bool {
         return FileManager().fileExists(atPath: offlineFileDestination(withFolder: folder).path)
     }
     
-    public func offlineURLIfAvailable(withFolder folder: String? = nil) -> URL {
+    public func offlineURLIfAvailable(withFolder folder: String? = AwesomeDownload.shared.defaultDownloadFolder) -> URL {
         if offlineFileExists(withFolder: folder) {
             return offlineFileDestination(withFolder: folder)
         }
         return self
     }
     
-    public func deleteOfflineFile(withFolder folder: String? = nil) -> Bool {
+    public func deleteOfflineFile(withFolder folder: String? = AwesomeDownload.shared.defaultDownloadFolder) -> Bool {
         guard offlineFileExists(withFolder: folder) else {
             return false
         }

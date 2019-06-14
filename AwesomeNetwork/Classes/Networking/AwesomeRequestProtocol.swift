@@ -19,6 +19,7 @@ public protocol AwesomeRequestProtocol {
     var queue: DispatchQueue { get }
     var retryCount: Int { get }
     var cancelPreviousRequest: Bool { get }
+    var cacheKey: String? { get }
     
     //func isSuccessResponse<T: Decodable>(_ response: T?) -> Bool
     func isSuccessResponse(_ response: Data?) -> Bool
@@ -74,7 +75,15 @@ extension AwesomeRequestProtocol {
         return false
     }
     
+    public var cacheKey: String? {
+        return nil
+    }
+    
     public var cachedData: Data? {
+        if let cacheKey = cacheKey {
+            return AwesomeNetwork.shared.cacheManager?.verifyForCache(with: cacheKey)
+        }
+        
         guard let urlRequest = urlRequest else {
             return nil
         }
@@ -83,6 +92,11 @@ extension AwesomeRequestProtocol {
     }
     
     public func saveToCache(_ data: Data?) {
+        if let cacheKey = cacheKey {
+            AwesomeNetwork.shared.cacheManager?.saveCache(data, with: cacheKey)
+            return
+        }
+        
         guard let urlRequest = urlRequest else {
             return
         }

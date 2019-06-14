@@ -68,7 +68,7 @@ public class AwesomeRealmCache: Object {
     func save() {
         let realm = try? Realm()
         try? realm?.write {
-            realm?.create(AwesomeRealmCache.self, value: self, update: true)
+            realm?.add(self, update: true)
         }
     }
     

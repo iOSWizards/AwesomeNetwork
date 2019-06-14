@@ -90,4 +90,17 @@ public class AwesomeCacheManager: NSObject {
         }
     }
     
+    public func verifyForCache(with cacheKey: String) -> Data? {
+        if let data = data(forKey: cacheKey) {
+            return data
+        }
+        return nil
+    }
+    
+    public func saveCache(_ data: Data?, with cacheKey: String) {
+        if let data = data {
+            cache(data, forKey: cacheKey)
+        }
+    }
+    
 }
