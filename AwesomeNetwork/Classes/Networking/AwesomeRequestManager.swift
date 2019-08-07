@@ -19,7 +19,9 @@ class AwesomeRequestManager {
     }
     
     func removeRequest(to urlRequest: URLRequest) {
-        requestQueue[urlRequest.urlCacheKey] = nil
+        DispatchQueue.main.sync {
+            requestQueue[urlRequest.urlCacheKey] = nil
+        }
     }
     
     func cancelRequest(to urlRequest: URLRequest) {
