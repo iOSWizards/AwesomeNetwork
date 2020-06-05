@@ -18,12 +18,14 @@ public class AwesomeNetwork {
     public var requester: AwesomeRequester?
     let reachability = AwesomeReachability()
     
-    public static func start(useSemaphore: Bool = false,
-                             defaultDispatchQueue: DispatchQueue = .global(qos: .default),
-                             defaultRequestTimeout: TimeInterval = 15,
-                             defaultCacheRule: AwesomeCacheRule = .fromCacheOrUrl,
-                             retryTimeout: TimeInterval = 1,
-                             cacheType: AwesomeCacheType = .realm) {
+    public func start(
+        useSemaphore: Bool = false,
+        defaultDispatchQueue: DispatchQueue = .global(qos: .default),
+        defaultRequestTimeout: TimeInterval = 15,
+        defaultCacheRule: AwesomeCacheRule = .fromCacheOrUrl,
+        retryTimeout: TimeInterval = 1,
+        cacheType: AwesomeCacheType = .realm
+    ) {
         shared.defaultDispatchQueue = defaultDispatchQueue
         shared.defaultCacheRule = defaultCacheRule
         shared.defaultRequestTimeout = defaultRequestTimeout
@@ -32,15 +34,15 @@ public class AwesomeNetwork {
         shared.requester = AwesomeRequester(useSemaphore: useSemaphore)
     }
     
-    public static func releaseDispatchQueue() {
+    public func releaseDispatchQueue() {
         AwesomeDispatcher.shared.releaseSemaphore()
     }
     
-    public static func clearCache() {
+    public func clearCache() {
         shared.cacheManager?.clearCache()
     }
     
-    public static func cancelAllRequests() {
+    public func cancelAllRequests() {
         shared.requester?.requestManager.cancelAllRequests()
         AwesomeUpload.shared.requestManager.cancelAllRequests()
     }
@@ -50,7 +52,7 @@ public class AwesomeNetwork {
     /// - Parameters:
     ///   - request: Request Protocol
     ///   - completion: Data or Error
-    public static func requestData(with request: AwesomeRequestProtocol,
+    public func requestData(with request: AwesomeRequestProtocol,
                                    completion:@escaping AwesomeDataResponse) {
         dataFromCache(with: request, completion: completion, fetchFromUrl: { didReturnCache in
             shared.requester?.performRequestRetrying(request, retryCount: request.retryCount) { (data, error) in
@@ -68,7 +70,7 @@ public class AwesomeNetwork {
     /// - Parameters:
     ///   - request: Request Protocol
     ///   - completion: Generic or Error
-    public static func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
+    public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
                                                     completion:@escaping (T?, AwesomeError?) -> Void) {
         requestData(with: request) { (data, error) in
             if let error = error {
@@ -95,7 +97,7 @@ public class AwesomeNetwork {
     /// - Parameters:
     ///   - request: Request Protocol
     ///   - completion: Generic array or Error
-    public static func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
+    public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
                                                     completion:@escaping ([T], AwesomeError?) -> Void) {
         requestData(with: request) { (data, error) in
             if let error = error {
@@ -123,7 +125,7 @@ public class AwesomeNetwork {
     ///   - request: Request Protocol
     ///   - completion: Data or Error
     ///   - fetchFromUrl: Called if should get from URL
-    static func dataFromCache(with request: AwesomeRequestProtocol,
+    func dataFromCache(with request: AwesomeRequestProtocol,
                               completion:@escaping AwesomeDataResponse,
                               fetchFromUrl:@escaping (_ returnedCache: Bool) -> Void) {
         var didReturnCache: Bool = false

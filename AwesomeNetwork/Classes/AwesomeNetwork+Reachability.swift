@@ -79,11 +79,11 @@ extension AwesomeNetwork {
         return NSNotification.Name(rawValue: event.rawValue)
     }
     
-    public static func startNetworkStateNotifier() {
+    public func startNetworkStateNotifier() {
         shared.startNetworkStateNotifier()
     }
     
-    public static func stopNetworkStateNotifier() {
+    public func stopNetworkStateNotifier() {
         shared.stopNetworkStateNotifier()
     }
     
