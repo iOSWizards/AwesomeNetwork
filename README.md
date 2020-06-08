@@ -25,7 +25,7 @@ AwesomeCore is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AwesomeNetwork', git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.2.5'
+pod 'AwesomeNetwork', git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.3.0'
 ```
 
 ### For Objective-C Project
@@ -75,8 +75,8 @@ It has to be done only once per execution.
 ///   - request: All params to fetch the data
 ///   - completion: (data, errorData)
 
-AANetworking.requestData(_ request: AwesomeRequestParameters?,
-                         completion:@escaping AAResponse)
+AANetworking.requestData(_ request: AwesomeRequestProtocol,
+                         completion:@escaping AwesomeDataResponse)
 ```
 
 **Generic Request: (Codable)**
@@ -88,8 +88,8 @@ AANetworking.requestData(_ request: AwesomeRequestParameters?,
 ///   - request: All params to fetch the data
 ///   - completion: (parsed codable object, errorData)
 
-requestGeneric(with: AwesomeRequestParameters?,
-               completion:@escaping (someObject: SomeCodableClass?, AwesomeError?)
+requestGeneric<T: Decodable>(with: AwesomeRequestProtocol?,
+               completion:@escaping (Result<T?, AwesomeError>) -> Void)
 ```
 ```swift
 /// Returns data either from cache or from URL
@@ -98,8 +98,8 @@ requestGeneric(with: AwesomeRequestParameters?,
 ///   - request: All params to fetch the data
 ///   - completion: (parsed codable object array, errorData)
 
-requestGenericArray(with: AwesomeRequestParameters?,
-                    completion:@escaping (someArray: [SomeCodableClass], AwesomeError?)
+requestGenericArray<T: Decodable>(with: AwesomeRequestProtocol?,
+                    completion:@escaping (Result<[T]?, AwesomeError>) -> Void)
 ```
 
 #### Uploading
