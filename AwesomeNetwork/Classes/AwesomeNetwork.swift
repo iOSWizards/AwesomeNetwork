@@ -26,12 +26,12 @@ public class AwesomeNetwork {
         retryTimeout: TimeInterval = 1,
         cacheType: AwesomeCacheType = .realm
     ) {
-        shared.defaultDispatchQueue = defaultDispatchQueue
-        shared.defaultCacheRule = defaultCacheRule
-        shared.defaultRequestTimeout = defaultRequestTimeout
-        shared.retryTimeout = retryTimeout
-        shared.cacheManager = AwesomeCacheManager(cacheType: cacheType)
-        shared.requester = AwesomeRequester(useSemaphore: useSemaphore)
+        self.defaultDispatchQueue = defaultDispatchQueue
+        self.defaultCacheRule = defaultCacheRule
+        self.defaultRequestTimeout = defaultRequestTimeout
+        self.retryTimeout = retryTimeout
+        self.cacheManager = AwesomeCacheManager(cacheType: cacheType)
+        self.requester = AwesomeRequester(useSemaphore: useSemaphore)
     }
     
     public func releaseDispatchQueue() {
@@ -39,11 +39,11 @@ public class AwesomeNetwork {
     }
     
     public func clearCache() {
-        shared.cacheManager?.clearCache()
+        cacheManager?.clearCache()
     }
     
     public func cancelAllRequests() {
-        shared.requester?.requestManager.cancelAllRequests()
+        requester?.requestManager.cancelAllRequests()
         AwesomeUpload.shared.requestManager.cancelAllRequests()
     }
     
@@ -54,8 +54,8 @@ public class AwesomeNetwork {
     ///   - completion: Data or Error
     public func requestData(with request: AwesomeRequestProtocol,
                                    completion:@escaping AwesomeDataResponse) {
-        dataFromCache(with: request, completion: completion, fetchFromUrl: { didReturnCache in
-            shared.requester?.performRequestRetrying(request, retryCount: request.retryCount) { (data, error) in
+        dataFromCache(with: request, completion: completion, fetchFromUrl: { [weak self] didReturnCache in
+            self?.requester?.performRequestRetrying(request, retryCount: request.retryCount) { (data, error) in
                 request.saveToCache(data)
                 
                 if request.cacheRule.shouldReturnUrlData(didReturnCache: didReturnCache) {
@@ -71,23 +71,23 @@ public class AwesomeNetwork {
     ///   - request: Request Protocol
     ///   - completion: Generic or Error
     public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
-                                                    completion:@escaping (T?, AwesomeError?) -> Void) {
+                                                    completion:@escaping (Result<T?, AwesomeError>) -> Void) {
         requestData(with: request) { (data, error) in
             if let error = error {
-                completion(nil, error)
+                completion(.failure(error))
                 return
             }
             
             guard let data = data else {
-                completion(nil, AwesomeError.unknown("No error from server and Data is nil."))
+                completion(.failure(.unknown("No error from server and Data is nil.")))
                 return
             }
             
             do {
                 let generic = try JSONDecoder().decode(T.self, from: data)
-                completion(generic, nil)
+                completion(.success(generic))
             } catch {
-                completion(nil, AwesomeError.parse(error.localizedDescription))
+                completion(.failure(.parse(error.localizedDescription)))
             }
         }
     }
@@ -98,23 +98,23 @@ public class AwesomeNetwork {
     ///   - request: Request Protocol
     ///   - completion: Generic array or Error
     public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
-                                                    completion:@escaping ([T], AwesomeError?) -> Void) {
+                                                    completion:@escaping (Result<[T]?, AwesomeError>) -> Void) {
         requestData(with: request) { (data, error) in
             if let error = error {
-                completion([], error)
+                completion(.failure(error))
                 return
             }
             
             guard let data = data else {
-                completion([], AwesomeError.unknown("No error from server and Data is nil."))
+                completion(.failure(.unknown("No error from server and Data is nil.")))
                 return
             }
             
             do {
                 let generic = try JSONDecoder().decode([T].self, from: data)
-                completion(generic, nil)
+                completion(.success(generic))
             } catch {
-                completion([], AwesomeError.parse(error.localizedDescription))
+                completion(.failure(.parse(error.localizedDescription)))
             }
         }
     }
