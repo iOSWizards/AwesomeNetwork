@@ -25,7 +25,7 @@ AwesomeCore is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'AwesomeNetwork', git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.3.0'
+pod 'AwesomeNetwork', git: 'https://github.com/iOSWizards/AwesomeNetwork', tag: '0.3.1'
 ```
 
 ### For Objective-C Project
@@ -210,7 +210,7 @@ AwesomeLocalization/Podspec Metadata/AwesomeRepository.podspec
 
 ```ruby
 //update tag to match the current version
-pod 'AwesomeRepository', git: 'https://github.com/iOSWizards/AwesomeRepository.git', tag: '0.1.0'
+pod 'AwesomeRepository', git: 'https://github.com/iOSWizards/AwesomeRepository.git', tag: '0.3.1'
 ```
 
 4. Commit your changes to **MASTER**
