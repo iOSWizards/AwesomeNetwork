@@ -79,14 +79,6 @@ extension AwesomeNetwork {
         return NSNotification.Name(rawValue: event.rawValue)
     }
     
-    public func startNetworkStateNotifier() {
-        shared.startNetworkStateNotifier()
-    }
-    
-    public func stopNetworkStateNotifier() {
-        shared.stopNetworkStateNotifier()
-    }
-    
 }
 
 extension UIView {
