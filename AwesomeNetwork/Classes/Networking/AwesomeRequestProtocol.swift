@@ -15,7 +15,7 @@ public protocol AwesomeRequestProtocol {
     var timeout: TimeInterval { get }
     var method: URLMethod { get }
     var urlRequest: URLRequest? { get }
-    var cacheRule: AwesomeCacheRule { get }
+    var cacheRule: AwesomeCacheRule { get set }
     var queue: DispatchQueue { get }
     var retryCount: Int { get }
     var cancelPreviousRequest: Bool { get }
