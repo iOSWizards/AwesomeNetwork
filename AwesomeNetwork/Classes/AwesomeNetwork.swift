@@ -55,11 +55,11 @@ public class AwesomeNetwork {
     public func requestData(with request: AwesomeRequestProtocol,
                                    completion:@escaping AwesomeDataResponse) {
         dataFromCache(with: request, completion: completion, fetchFromUrl: { [weak self] didReturnCache in
-            self?.requester?.performRequestRetrying(request, retryCount: request.retryCount) { (data, error) in
-                request.saveToCache(data)
+            self?.requester?.performRequestRetrying(request, retryCount: request.retryCount) { (result) in
+                request.saveToCache(try? result.get())
                 
                 if request.cacheRule.shouldReturnUrlData(didReturnCache: didReturnCache) {
-                    completion(data, error)
+                    completion(result)
                 }
             }
         })
@@ -72,22 +72,17 @@ public class AwesomeNetwork {
     ///   - completion: Generic or Error
     public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
                                                     completion:@escaping (Result<T, AwesomeError>) -> Void) {
-        requestData(with: request) { (data, error) in
-            if let error = error {
+        requestData(with: request) { (result) in
+            switch result {
+            case .success(let data):
+                do {
+                    let generic = try JSONDecoder().decode(T.self, from: data)
+                    completion(.success(generic))
+                } catch {
+                    completion(.failure(.parse(error.localizedDescription)))
+                }
+            case .failure(let error):
                 completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.unknown("No error from server and Data is nil.")))
-                return
-            }
-            
-            do {
-                let generic = try JSONDecoder().decode(T.self, from: data)
-                completion(.success(generic))
-            } catch {
-                completion(.failure(.parse(error.localizedDescription)))
             }
         }
     }
@@ -99,22 +94,17 @@ public class AwesomeNetwork {
     ///   - completion: Generic array or Error
     public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
                                                     completion:@escaping (Result<[T], AwesomeError>) -> Void) {
-        requestData(with: request) { (data, error) in
-            if let error = error {
+        requestData(with: request) { (result) in
+            switch result {
+            case .success(let data):
+                do {
+                    let generic = try JSONDecoder().decode([T].self, from: data)
+                    completion(.success(generic))
+                } catch {
+                    completion(.failure(.parse(error.localizedDescription)))
+                }
+            case .failure(let error):
                 completion(.failure(error))
-                return
-            }
-            
-            guard let data = data else {
-                completion(.failure(.unknown("No error from server and Data is nil.")))
-                return
-            }
-            
-            do {
-                let generic = try JSONDecoder().decode([T].self, from: data)
-                completion(.success(generic))
-            } catch {
-                completion(.failure(.parse(error.localizedDescription)))
             }
         }
     }
@@ -134,14 +124,14 @@ public class AwesomeNetwork {
         if request.cacheRule.shouldGetFromCache,
             let data = request.cachedData,
             request.isSuccessResponse(data) {
-            completion(data, nil)
+            completion(.success(data))
             didReturnCache = true
         }
         
         // proceed to url if set in cache rule
         guard request.cacheRule.shouldGetFromUrl(didReturnCache: didReturnCache) else {
             if !didReturnCache {
-                completion(nil, AwesomeError.cacheRule("Cache rule set to get only from cache, but there was no cache for this URL request."))
+                completion(.failure(AwesomeError.cacheRule("Cache rule set to get only from cache, but there was no cache for this URL request.")))
             }
             return
         }
