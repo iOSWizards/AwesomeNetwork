@@ -16,8 +16,8 @@ public enum URLMethod: String {
     case PATCH
 }
 
-public typealias AwesomeDataResponse = (Data?, AwesomeError?) -> Void
-public typealias AwesomeRetryDataResponse = (Data?, AwesomeError?, Int) -> Void
+public typealias AwesomeDataResponse = (Result<Data, AwesomeError>) -> Void
+public typealias AwesomeRetryDataResponse = (Result<Data, AwesomeError>, Int) -> Void
 public typealias AwesomeRequesterHeader = [String: String]
 
 public class AwesomeRequester: NSObject {
@@ -40,10 +40,10 @@ public class AwesomeRequester: NSObject {
                                 retryCount: Int,
                                 intermediate: AwesomeRetryDataResponse? = nil,
                                 completion:@escaping AwesomeDataResponse) {
-        performRequest(request) { (data, error) in
-            intermediate?(data, error, retryCount)
+        performRequest(request) { (result) in
+            intermediate?(result, retryCount)
             
-            if !request.isSuccessResponse(data), retryCount > 0 {
+            if !request.isSuccessResponse(try? result.get()), retryCount > 0 {
                 // adds a small timeout between calls
                 request.queue.asyncAfter(deadline: .now()+AwesomeNetwork.shared.retryTimeout, execute: {
                     self.performRequestRetrying(request,
@@ -52,7 +52,7 @@ public class AwesomeRequester: NSObject {
                                                 completion: completion)
                 })
             } else {
-                completion(data, error)
+                completion(result)
             }
         }
     }
@@ -93,23 +93,24 @@ public class AwesomeRequester: NSObject {
             self.requestManager.removeRequest(to: urlRequest)
             
             if let error = error {
-                print("There was an error \(error.localizedDescription)")
-                
                 let urlError = error as NSError
-                if urlError.code == NSURLErrorTimedOut {
-                    completion(nil, AwesomeError.timeOut(error.localizedDescription))
-                } else if urlError.code == NSURLErrorNotConnectedToInternet {
-                    completion(nil, AwesomeError.noConnection(error.localizedDescription))
-                } else if urlError.code == URLError.cancelled.rawValue {
-                    completion(nil, AwesomeError.cancelled(error.localizedDescription))
-                } else {
-                    completion(nil, AwesomeError.unknown(error.localizedDescription))
+                switch urlError.code {
+                case NSURLErrorTimedOut:
+                    completion(.failure(.timeOut(error.localizedDescription)))
+                case NSURLErrorNotConnectedToInternet:
+                    completion(.failure(.noConnection(error.localizedDescription)))
+                case URLError.cancelled.rawValue:
+                    completion(.failure(.cancelled(error.localizedDescription)))
+                default:
+                    completion(.failure(.unknown(error.localizedDescription)))
                 }
-            }else{
+            } else {
                 if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 401  {
-                    completion(nil, AwesomeError.unauthorized)
+                    completion(.failure(.unauthorized))
+                } else if let data = data {
+                    completion(.success(data))
                 } else {
-                    completion(data, nil)
+                    completion(.failure(.invalidData))
                 }
             }
         }
