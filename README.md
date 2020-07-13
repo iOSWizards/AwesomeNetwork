@@ -210,7 +210,7 @@ AwesomeLocalization/Podspec Metadata/AwesomeRepository.podspec
 
 ```ruby
 //update tag to match the current version
-pod 'AwesomeRepository', git: 'https://github.com/iOSWizards/AwesomeRepository.git', tag: '0.3.2'
+pod 'AwesomeRepository', git: 'https://github.com/iOSWizards/AwesomeRepository.git', tag: '0.3.3'
 ```
 
 4. Commit your changes to **MASTER**
