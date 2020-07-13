@@ -71,7 +71,7 @@ public class AwesomeNetwork {
     ///   - request: Request Protocol
     ///   - completion: Generic or Error
     public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
-                                                    completion:@escaping (Result<T?, AwesomeError>) -> Void) {
+                                                    completion:@escaping (Result<T, AwesomeError>) -> Void) {
         requestData(with: request) { (data, error) in
             if let error = error {
                 completion(.failure(error))
@@ -98,7 +98,7 @@ public class AwesomeNetwork {
     ///   - request: Request Protocol
     ///   - completion: Generic array or Error
     public func requestGeneric<T: Decodable>(with request: AwesomeRequestProtocol,
-                                                    completion:@escaping (Result<[T]?, AwesomeError>) -> Void) {
+                                                    completion:@escaping (Result<[T], AwesomeError>) -> Void) {
         requestData(with: request) { (data, error) in
             if let error = error {
                 completion(.failure(error))
