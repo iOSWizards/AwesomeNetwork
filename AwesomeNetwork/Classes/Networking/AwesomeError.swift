@@ -19,6 +19,7 @@ public enum AwesomeError: Error, Equatable, LocalizedError {
     case uploadFailed(String?)
     case cacheRule(String?)
     case parse(String?)
+    case error(Error)
     
     public static func == (lhs: AwesomeError, rhs: AwesomeError) -> Bool {
         switch (lhs, rhs) {
