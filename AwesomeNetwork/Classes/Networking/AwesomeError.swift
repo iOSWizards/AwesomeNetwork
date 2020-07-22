@@ -24,16 +24,17 @@ public enum AwesomeError: Error, Equatable, LocalizedError {
     public static func == (lhs: AwesomeError, rhs: AwesomeError) -> Bool {
         switch (lhs, rhs) {
         case (.invalidUrl, .invalidUrl): return true
-        case (.timeOut, .timeOut): return true
-        case (.unknown, .unknown): return true
-        case (.cancelled, .cancelled): return true
-        case (.generic, .generic): return true
-        case (.noConnection, .noConnection): return true
+        case (.timeOut(let lhe), .timeOut(let rhe)): return lhe == rhe
+        case (.unknown(let lhe), .unknown(let rhe)): return lhe == rhe
+        case (.cancelled(let lhe), .cancelled(let rhe)): return lhe == rhe
+        case (.generic(let lhe), .generic(let rhe)): return lhe == rhe
+        case (.noConnection(let lhe), .noConnection(let rhe)): return lhe == rhe
         case (.unauthorized, .unauthorized): return true
         case (.invalidData, .invalidData): return true
-        case (.uploadFailed, .uploadFailed): return true
-        case (.cacheRule, .cacheRule): return true
-        case (.parse, .parse): return true
+        case (.uploadFailed(let lhe), .uploadFailed(let rhe)): return lhe == rhe
+        case (.cacheRule(let lhe), .cacheRule(let rhe)): return lhe == rhe
+        case (.parse(let lhe), .parse(let rhe)): return lhe == rhe
+        case (.error, .error): return true
         default: return false
         }
     }
