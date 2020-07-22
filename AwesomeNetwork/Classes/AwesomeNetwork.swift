@@ -79,7 +79,7 @@ public class AwesomeNetwork {
                     let generic = try JSONDecoder().decode(T.self, from: data)
                     completion(.success(generic))
                 } catch {
-                    completion(.failure(.parse(error.localizedDescription)))
+                    completion(.failure(.parse(String(describing: error))))
                 }
             case .failure(let error):
                 completion(.failure(error))
@@ -101,7 +101,7 @@ public class AwesomeNetwork {
                     let generic = try JSONDecoder().decode([T].self, from: data)
                     completion(.success(generic))
                 } catch {
-                    completion(.failure(.parse(error.localizedDescription)))
+                    completion(.failure(.parse(String(describing: error))))
                 }
             case .failure(let error):
                 completion(.failure(error))
