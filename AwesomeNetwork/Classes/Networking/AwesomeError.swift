@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AwesomeError: Error, Equatable {
+public enum AwesomeError: Error, Equatable, LocalizedError {
     case invalidUrl
     case timeOut(String?)
     case unknown(String?)
@@ -35,5 +35,9 @@ public enum AwesomeError: Error, Equatable {
         case (.parse, .parse): return true
         default: return false
         }
+    }
+    
+    public var errorDescription: String? {
+        return String(describing: self)
     }
 }
