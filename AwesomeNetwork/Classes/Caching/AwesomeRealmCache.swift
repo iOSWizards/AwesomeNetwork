@@ -34,9 +34,11 @@ public class AwesomeRealmCache: Object {
     }
     
     static func clearDatabase() {
-        let realm = try? Realm()
-        try? realm?.write {
-            realm?.deleteAll()
+        performRealmActions {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
         }
     }
     
@@ -66,18 +68,38 @@ public class AwesomeRealmCache: Object {
     }
     
     func save() {
-        let realm = try? Realm()
-        try? realm?.write {
-            realm?.add(self, update: true)
+        AwesomeRealmCache.performRealmActions {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(self, update: true)
+            }
         }
     }
     
     static func object(forKey key: String) -> AwesomeRealmCache? {
-        let realm = try? Realm()
-        return realm?.object(ofType: AwesomeRealmCache.self, forPrimaryKey: key)
+        var object: AwesomeRealmCache?
+        performRealmActions {
+            let realm = try Realm()
+            object = realm.object(ofType: AwesomeRealmCache.self, forPrimaryKey: key)
+        }
+        return object
     }
     
     static func data(forKey key: String) -> Data? {
         return object(forKey: key)?.value
+    }
+    
+    /// Function for performing `Realm` database actions.
+    ///
+    /// This function automatically wraps the actions inside a `do catch` block
+    /// and prints out any errors.
+    ///
+    /// - Parameter block: The block that executes the `Realm` actions
+    static func performRealmActions(_ block: () throws -> Void) {
+        do {
+            try block()
+        } catch {
+            print("Realm Error: ", error)
+        }
     }
 }
