@@ -14,10 +14,32 @@ public enum AwesomeCacheType {
 }
 
 public enum AwesomeCacheRule {
+    /// Fetch data from the Cache only
     case fromCacheOnly
+    
+    /// Fetch data from the Cache, if available. Otherwise fetch from the URL
+    /// and update the cache.
+    ///
+    /// Callback is only fired once, either from the Cache or the URL.
     case fromCacheOrUrl
-    case fromCacheOrUrlThenUpdate // returns cache or URL data, then fetchs data from URL but doesn't return
+    
+    /// Fetch data from the cache, if available. Otherwise fetch from the URL.
+    ///
+    /// If the data is fetched from the Cache then a request is also made to the URL
+    /// and then the cache is updated with the new data.
+    ///
+    /// Callback is only fired once, either from the Cache or the URL.
+    case fromCacheOrUrlThenUpdate
+    
+    /// Fetch data from the Cache and the URL.
+    ///
+    /// Callback fires twice, once from Cache and once from URL.
     case fromCacheAndUrl
+    
+    /// Fetch data from the URL, bypassing the cache.
+    /// Cache is updated with the successfully retrieved data.
+    ///
+    /// Callback is only fired once.
     case fromURL
     
     public var shouldGetFromCache: Bool {
