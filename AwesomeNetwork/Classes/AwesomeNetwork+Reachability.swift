@@ -50,7 +50,7 @@ extension AwesomeNetwork {
     // MARK: - State Notifier
     
     public var isReachable: Bool {
-        return reachability?.connection != .none
+        return reachability?.connection != AwesomeReachability.Connection.none
     }
     
     public var isWifiReachable: Bool {
