@@ -125,4 +125,8 @@ public class AwesomeCacheManager: NSObject {
         }
     }
     
+    public func remove(forKey key: String) {
+           AwesomeRealmCache.remove(forKey: key)
+       }
+    
 }
